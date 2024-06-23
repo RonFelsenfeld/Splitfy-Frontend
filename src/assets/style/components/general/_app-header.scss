@@ -1,0 +1,13 @@
+.app-header {
+  height: $app-header-height;
+  padding-inline: em(10px);
+
+  background-color: $main-theme-clr;
+  color: $surface-clr;
+
+  .logo {
+    font-size: em(20px);
+    font-family: LatoBold;
+    letter-spacing: 0.1px;
+  }
+}
