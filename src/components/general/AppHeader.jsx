@@ -1,3 +1,5 @@
+import { groupService } from '../../services/group.service.local.js'
+
 export function AppHeader() {
   return (
     <header className="app-header full main-layout">
