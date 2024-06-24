@@ -112,9 +112,15 @@
 }
 
 @mixin profilePicture() {
-  width: em(36px);
-  height: em(36px);
+  width: em(34px);
+  height: em(34px);
 
   border: 1px solid $profile-picture-border-clr;
   border-radius: 50%;
+}
+
+@mixin pageHeader {
+  padding: em(13px) em(10px) em(10px);
+  border-block-end: 1px solid $group-header-border-clr;
+  background-color: $expense-border-clr;
 }

@@ -3,9 +3,7 @@
   box-shadow: $main-column-shadow;
 
   .group-header {
-    padding: em(13px) em(10px) em(10px);
-    border-block-end: 1px solid $group-header-border-clr;
-    background-color: $expense-border-clr;
+    @include pageHeader;
 
     .details-container {
       gap: 6px;

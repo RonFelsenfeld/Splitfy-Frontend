@@ -1,0 +1,117 @@
+.expense-preview {
+  display: grid;
+  grid-template-columns: repeat(2, 35px) 1fr repeat(2, 100px);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    'date icon title paid-desc lent-desc'
+    'date icon title paid-amount lent-amount';
+
+  width: 100%;
+  height: $expense-preview-height;
+  position: relative;
+
+  padding: em(10px) em(5px);
+  border-block-end: 1px solid $expense-border-clr;
+
+  &:hover {
+    background-color: $hovered-expense-bg-clr;
+    cursor: pointer;
+
+    .expense-title {
+      text-decoration-line: underline;
+    }
+
+    .btn-remove-expense {
+      opacity: 1;
+    }
+  }
+
+  .expense-date {
+    grid-area: date;
+    place-self: center;
+  }
+
+  .expense-icon {
+    grid-area: icon;
+  }
+
+  .expense-title {
+    @include overflowTxt;
+
+    grid-area: title;
+    align-self: center;
+    margin-inline-start: 14px;
+
+    font-family: LatoBold;
+    line-height: rem(18px);
+  }
+
+  .paid-desc {
+    grid-area: paid-desc;
+  }
+
+  .paid-amount {
+    grid-area: paid-amount;
+  }
+
+  .lent-desc {
+    grid-area: lent-desc;
+  }
+
+  .lent-amount {
+    grid-area: lent-amount;
+  }
+
+  .paid-desc,
+  .lent-desc {
+    font-size: em(12px);
+    color: $expense-decs-clr;
+  }
+
+  .paid-amount,
+  .lent-amount {
+    color: black;
+  }
+
+  .paid-desc,
+  .paid-amount {
+    margin-inline-end: 14px;
+    text-align: right;
+  }
+
+  .btn-remove-expense {
+    position: absolute;
+    inset: 50% 5px auto auto;
+    padding: 5px;
+
+    background-color: transparent;
+    transform: translateY(-50%);
+    opacity: 0;
+
+    &::before {
+      font-family: FaSolid;
+      content: '\58';
+      font-size: em(16px);
+      color: $btn-remove-clr;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto 50% 0 auto;
+
+      height: 2px;
+      width: 60%;
+
+      background-color: $btn-remove-clr;
+      transform: translateX(50%);
+      opacity: 0;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}

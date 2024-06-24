@@ -1,7 +1,8 @@
 // Layout colors
 $surface-clr: rgb(255, 255, 255);
-$group-header-bg-clr: rgb(238, 238, 238); // Also when hovering
+$group-header-bg-clr: rgb(238, 238, 238);
 $list-header-bg-clr: rgb(246, 246, 246);
+$hovered-expense-bg-clr: rgb(248, 248, 248);
 
 // Layout dimensions
 $app-header-height: 33px;
@@ -13,13 +14,17 @@ $main-font-family: LatoRegular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $main-font-clr: rgb(51, 51, 51);
 $secondary-font-clr: rgb(153, 153, 153);
 $hovered-font-clr: rgb(102, 102, 102);
+$expense-decs-clr: rgb(170, 170, 170);
 
 // Theme color
-$main-theme-clr: rgb(91, 197, 167); // Own
+$main-theme-clr: rgb(91, 197, 167);
 
 $secondary-theme-clr-20: rgb(200, 52, 0);
 $secondary-theme-clr-10: rgb(255, 82, 22);
-$secondary-theme-clr: rgb(255, 101, 47); // In-debt
+$secondary-theme-clr: rgb(255, 101, 47);
+
+// Extra Colors
+$btn-remove-clr: rgb(204, 0, 0);
 
 // Borders colors
 $main-column-border-clr: rgb(204, 204, 204);

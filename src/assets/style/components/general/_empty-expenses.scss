@@ -1,0 +1,24 @@
+.empty-expenses {
+  gap: em(30px);
+  padding: em(10px) em(50px);
+  margin-block-start: em(30px);
+
+  .no-expense-image {
+    width: 150px;
+  }
+
+  .no-expense-title {
+    font-size: em(28px);
+    font-family: LatoBold;
+    line-height: 110%;
+    margin-block-start: rem(15px);
+  }
+
+  .no-expenses-desc {
+    margin-block: rem(15px) rem(9px);
+
+    font-size: em(18px);
+    line-height: em(24px);
+    color: $secondary-font-clr;
+  }
+}

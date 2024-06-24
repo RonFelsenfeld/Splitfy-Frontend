@@ -15,6 +15,7 @@
 // COMPONENTS
 @import 'components/general/app-header';
 @import 'components/general/add-expense-btn';
+@import 'components/general/empty-expenses';
 
 @import 'components/sidebar/sidebar';
 @import 'components/sidebar/sidebar-group-list';
@@ -26,3 +27,6 @@
 
 @import 'components/friend/friend-list';
 @import 'components/friend/friend-preview';
+
+@import 'components/expense/expense-list';
+@import 'components/expense/expense-preview';

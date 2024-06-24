@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 
 import { loadGroup } from '../../store/actions/group.actions'
 import { AddExpenseBtn } from '../general/AddExpenseBtn'
+import { ExpenseList } from '../expense/ExpenseList'
+import { EmptyExpenses } from '../general/EmptyExpenses'
 
 export function GroupDetails() {
   const group = useSelector(store => store.groupModule.currentGroup)
@@ -14,12 +16,14 @@ export function GroupDetails() {
   }, [groupId])
 
   if (!group) return <div>Loading group...</div>
+
+  const { expenses } = group
   return (
     <section className="group-details">
       <header className="group-header flex align-center justify-between">
         <div className="details-container flex align-center">
           <img
-            src="/assets/img/group-default.png"
+            src="/assets/img/general/group-default.png"
             alt="Group profile image"
             className="group-image"
           />
@@ -28,6 +32,8 @@ export function GroupDetails() {
 
         <AddExpenseBtn />
       </header>
+
+      {expenses.length ? <ExpenseList expenses={expenses} /> : <EmptyExpenses />}
     </section>
   )
 }
