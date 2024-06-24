@@ -1,10 +1,10 @@
 import { UserIcon } from '../../services/svg.service'
 
-export function FriendPreview() {
+export function FriendPreview({ friend }) {
   return (
     <article className="friend-preview flex align-center">
       <UserIcon />
-      <h4 className="friend-name">FRIEND NAME</h4>
+      <h4 className="friend-name">{friend.fullName}</h4>
     </article>
   )
 }

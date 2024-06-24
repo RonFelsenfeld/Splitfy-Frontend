@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux'
 import { GroupList } from '../group/GroupList'
 
 export function SidebarGroupList() {
+  const groups = useSelector(store => store.groupModule.groups)
+
   return (
     <section className="sidebar-groups-section">
       <header className="group-list-header flex align-center justify-between">
@@ -8,7 +11,7 @@ export function SidebarGroupList() {
         <button className="btn-add-group">add</button>
       </header>
 
-      <GroupList />
+      <GroupList groups={groups} />
     </section>
   )
 }

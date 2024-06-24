@@ -15,14 +15,14 @@ export function Sidebar() {
           </div>
         </NavLink>
 
-        <NavLink to="/" className="main-nav-link">
+        <NavLink to="/activity" className="main-nav-link">
           <div className="link-container flex align-center">
             <FlagIcon />
             <h4 className="link-title">Recent activity</h4>
           </div>
         </NavLink>
 
-        <NavLink to="/" className="main-nav-link">
+        <NavLink to="/all" className="main-nav-link">
           <div className="link-container smaller flex align-center">
             <ListIcon />
             <h4 className="link-title">All Expenses</h4>

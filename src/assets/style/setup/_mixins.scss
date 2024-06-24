@@ -104,3 +104,9 @@
     transform: translateY(-50%);
   }
 }
+
+@mixin overflowTxt() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

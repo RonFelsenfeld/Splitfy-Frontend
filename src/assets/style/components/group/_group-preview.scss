@@ -3,6 +3,8 @@
   padding: 3px 8px;
 
   .group-title {
+    @include overflowTxt;
+
     font-size: rem(14px);
     font-weight: normal;
     line-height: 18px;

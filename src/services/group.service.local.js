@@ -11,6 +11,7 @@ export const groupService = {
   save,
   getEmptyGroup,
   getEmptyExpense,
+  getAllFriendsFromGroups,
 }
 
 async function query() {
@@ -61,6 +62,15 @@ function getEmptyExpense() {
     membersInvolvedIds: [],
     notes: [],
   }
+}
+
+function getAllFriendsFromGroups(groups) {
+  const friends = groups.reduce((acc, group) => {
+    acc = [...acc, ...group.members]
+    return acc
+  }, [])
+
+  return friends.sort((f1, f2) => f1.fullName.localeCompare(f2.fullName))
 }
 
 ////////////////////////////////////////////////////
