@@ -1,0 +1,11 @@
+.friend-preview {
+  gap: 5px;
+  padding: 3px 8px;
+
+  .friend-name {
+    font-size: rem(14px);
+    font-weight: normal;
+    line-height: 18px;
+    color: $secondary-font-clr;
+  }
+}

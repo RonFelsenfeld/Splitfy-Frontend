@@ -1,0 +1,5 @@
+.workspace-index {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  min-height: calc(100dvh - $app-header-height);
+}

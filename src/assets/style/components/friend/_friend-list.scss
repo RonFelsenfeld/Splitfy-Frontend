@@ -1,0 +1,15 @@
+.friend-list {
+  .friend-link {
+    @include link;
+
+    &.active {
+      .friend-name {
+        color: inherit;
+      }
+    }
+
+    .friend-name {
+      color: $secondary-font-clr;
+    }
+  }
+}

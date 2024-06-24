@@ -1,6 +1,7 @@
 // Layout colors
 $surface-clr: rgb(255, 255, 255);
 $group-header-bg-clr: rgb(238, 238, 238); // Also when hovering
+$list-header-bg-clr: rgb(246, 246, 246);
 
 // Layout dimensions
 $app-header-height: 33px;
@@ -20,6 +21,9 @@ $secondary-theme-clr: rgb(255, 101, 47); // In-debt
 // Borders colors
 $main-column-border-clr: rgb(204, 204, 204);
 $expense-border-clr: rgb(238, 238, 238);
+$list-header-border-top-clr: rgb(243, 243, 243);
+$hovered-list-header-border-top-clr: rgb(233, 233, 233);
+$hovered-list-header-border-bottom-clr: rgb(230, 230, 230);
 
 // Extra
 $el-br: 5px;

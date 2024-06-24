@@ -1,0 +1,16 @@
+.sidebar-groups-section {
+  margin-block-start: 5px;
+  font-size: em(11px);
+
+  .group-list-header {
+    @include listHeader;
+
+    .groups-title {
+      text-transform: uppercase;
+    }
+
+    .btn-add-group {
+      @include btnAdd;
+    }
+  }
+}

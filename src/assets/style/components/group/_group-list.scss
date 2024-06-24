@@ -1,0 +1,17 @@
+.group-list {
+  margin-block-end: 5px;
+
+  .group-link {
+    @include link;
+
+    &.active {
+      .group-title {
+        color: inherit;
+      }
+    }
+
+    .group-title {
+      color: $secondary-font-clr;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.sidebar-friends-section {
+  font-size: em(11px);
+
+  .friend-list-header {
+    @include listHeader;
+
+    .friends-title {
+      text-transform: uppercase;
+    }
+
+    .btn-add-friend {
+      @include btnAdd;
+    }
+  }
+}

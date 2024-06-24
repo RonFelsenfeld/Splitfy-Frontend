@@ -1,0 +1,31 @@
+.sidebar {
+  padding-inline-end: 20px;
+
+  .main-nav {
+    margin-block: 11px 10px;
+
+    .main-nav-link {
+      @include link;
+
+      color: $secondary-font-clr;
+
+      &:last-of-type {
+        margin-block-start: 10px;
+      }
+
+      .link-container {
+        gap: 5px;
+        padding: 3px 8px 5px 8px;
+
+        &.smaller {
+          padding: 3px 8px;
+          font-size: em(14px);
+        }
+      }
+
+      .link-title {
+        font-weight: normal;
+      }
+    }
+  }
+}
