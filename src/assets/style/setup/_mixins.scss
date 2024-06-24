@@ -110,3 +110,11 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+@mixin profilePicture() {
+  width: em(36px);
+  height: em(36px);
+
+  border: 1px solid $profile-picture-border-clr;
+  border-radius: 50%;
+}

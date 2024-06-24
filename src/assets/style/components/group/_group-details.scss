@@ -1,0 +1,26 @@
+.group-details {
+  border-inline: 1px solid $main-column-border-clr;
+  box-shadow: $main-column-shadow;
+
+  .group-header {
+    padding: em(13px) em(10px) em(10px);
+    border-block-end: 1px solid $group-header-border-clr;
+    background-color: $expense-border-clr;
+
+    .details-container {
+      gap: 6px;
+
+      .group-image {
+        @include profilePicture;
+      }
+
+      .group-title {
+        @include overflowTxt;
+
+        font-size: em(24px);
+        line-height: rem(38px);
+        font-family: LatoBold, Arial, Helvetica, sans-serif;
+      }
+    }
+  }
+}

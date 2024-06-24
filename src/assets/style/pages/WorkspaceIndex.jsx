@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
+import { Outlet } from 'react-router'
 
-import { loadGroups } from '../../store/actions/group.actions'
+import { loadGroups } from '../../../store/actions/group.actions'
 
-import { Sidebar } from '../sidebar/Sidebar'
+import { Sidebar } from '../../../components/sidebar/Sidebar'
 
 export function WorkspaceIndex() {
   useEffect(() => {
@@ -12,6 +13,7 @@ export function WorkspaceIndex() {
   return (
     <section className="workspace-index">
       <Sidebar />
+      <Outlet />
     </section>
   )
 }

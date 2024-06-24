@@ -10,10 +10,11 @@
 @import 'basics/layout';
 
 // PAGES
+@import 'pages/workspace-index';
 
 // COMPONENTS
 @import 'components/general/app-header';
-@import 'components/general/workspace-index';
+@import 'components/general/add-expense-btn';
 
 @import 'components/sidebar/sidebar';
 @import 'components/sidebar/sidebar-group-list';
@@ -21,6 +22,7 @@
 
 @import 'components/group/group-list';
 @import 'components/group/group-preview';
+@import 'components/group/group-details';
 
 @import 'components/friend/friend-list';
 @import 'components/friend/friend-preview';
