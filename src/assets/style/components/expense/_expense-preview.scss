@@ -29,6 +29,16 @@
   .expense-date {
     grid-area: date;
     place-self: center;
+    color: $secondary-font-clr;
+
+    .month {
+      font-size: em(10px);
+      text-transform: uppercase;
+    }
+
+    .date {
+      font-size: em(20px);
+    }
   }
 
   .expense-icon {
@@ -71,6 +81,7 @@
   .paid-amount,
   .lent-amount {
     color: black;
+    font-family: LatoBold;
   }
 
   .paid-desc,

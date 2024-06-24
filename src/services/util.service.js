@@ -5,6 +5,10 @@ export const utilService = {
   saveToStorage,
   loadFromStorage,
   getRandomTimestampLastMonth,
+  getShortenName,
+  getMonthFromTimestamp,
+  getDateFromTimestamp,
+  getFormattedCurrency,
 }
 
 function makeId(length = 6) {
@@ -50,4 +54,25 @@ function getRandomTimestampLastMonth() {
 
   const randomTime = new Date(past.getTime() + Math.random() * (now.getTime() - past.getTime()))
   return randomTime.getTime()
+}
+
+function getShortenName(name) {
+  const names = name.split(' ')
+  const [firstName, lastName] = names
+  return `${firstName} ${lastName.charAt(0)}.`
+}
+
+function getMonthFromTimestamp(timestamp) {
+  const date = new Date(timestamp)
+  return date.toLocaleString('default', { month: 'short' })
+}
+
+function getDateFromTimestamp(timestamp) {
+  const date = new Date(timestamp)
+  return date.getDate()
+}
+
+function getFormattedCurrency(amount) {
+  const IsraelShekels = new Intl.NumberFormat('en-us', { style: 'currency', currency: 'ILS' })
+  return IsraelShekels.format(amount)
 }
