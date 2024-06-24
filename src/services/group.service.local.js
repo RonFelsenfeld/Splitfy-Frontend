@@ -154,17 +154,17 @@ function _generateDemoExpense(expense, members) {
   newExpense.paidBy = rndMember
 
   // ! Generating random involved members ids
-  const rndInvolved = members.filter(member => {
+  const rndInvolvedMembers = members.filter(member => {
     if (member._id !== rndMember._id && Math.random() > 0.5) return member
   })
 
   // ! Insure that there is at least one involved member
-  if (!rndInvolved.length) {
-    const rndInvolvedMember = members.find(m => m._id !== rndInvolved._id)
-    rndInvolved.push(rndInvolvedMember)
+  if (!rndInvolvedMembers.length) {
+    const rndInvolvedMember = members.find(m => m._id !== rndMember._id)
+    rndInvolvedMembers.push(rndInvolvedMember)
   }
 
-  newExpense.involvedMembersIds = [...rndInvolved]
+  newExpense.involvedMembersIds = rndInvolvedMembers.map(m => m._id)
 
   // ! Generating random timestamp
   newExpense.at = utilService.getRandomTimestampLastMonth()
