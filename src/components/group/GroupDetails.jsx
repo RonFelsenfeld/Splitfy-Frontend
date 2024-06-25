@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-
 import { loadGroup } from '../../store/actions/group.actions'
-import { AddExpenseBtn } from '../general/AddExpenseBtn'
-import { ExpenseList } from '../expense/ExpenseList'
+
 import { EmptyExpenses } from '../general/EmptyExpenses'
+import { ExpenseList } from '../expense/ExpenseList'
+import { AddExpenseModal } from '../modals/AddExpenseModal'
 
 export function GroupDetails() {
+  const [isAddingExpense, setIsAddingExpense] = useState(true)
   const group = useSelector(store => store.groupModule.currentGroup)
   const { groupId } = useParams()
 
@@ -30,10 +31,14 @@ export function GroupDetails() {
           <h2 className="group-title">{group.title}</h2>
         </div>
 
-        <AddExpenseBtn />
+        <button className="btn-add-expense" onClick={() => setIsAddingExpense(true)}>
+          Add an expense
+        </button>
       </header>
 
       {expenses.length ? <ExpenseList expenses={expenses} /> : <EmptyExpenses />}
+
+      {isAddingExpense && <AddExpenseModal onCloseModal={() => setIsAddingExpense(false)} />}
     </section>
   )
 }

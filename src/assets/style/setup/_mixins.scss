@@ -124,3 +124,23 @@
   border-block-end: 1px solid $group-header-border-clr;
   background-color: $expense-border-clr;
 }
+
+@mixin btnX($color: $btn-remove-clr) {
+  font-family: FaSolid;
+  content: '\58';
+  font-size: em(16px);
+  color: $color;
+}
+
+@mixin pillBtn($border-style, $color: $hovered-font-clr) {
+  padding: 2px 5px 0;
+  border-radius: 2em;
+  border: 1px $border-style $main-column-border-clr;
+
+  color: $color;
+  background-color: $pill-btn-bg-clr;
+
+  &:hover {
+    background-color: $expense-border-clr;
+  }
+}

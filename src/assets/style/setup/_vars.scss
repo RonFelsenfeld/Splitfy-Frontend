@@ -17,7 +17,10 @@ $hovered-font-clr: rgb(102, 102, 102);
 $expense-decs-clr: rgb(170, 170, 170);
 
 // Theme color
+$main-theme-clr-10: rgb(49, 138, 113);
+$main-theme-clr-5: rgb(65, 183, 149);
 $main-theme-clr: rgb(91, 197, 167);
+$main-theme-clr--10: rgb(205, 237, 228);
 
 $secondary-theme-clr-20: rgb(200, 52, 0);
 $secondary-theme-clr-10: rgb(255, 82, 22);
@@ -25,6 +28,7 @@ $secondary-theme-clr: rgb(255, 101, 47);
 
 // Extra Colors
 $btn-remove-clr: rgb(204, 0, 0);
+$pill-btn-bg-clr: rgb(246, 246, 246);
 
 // Borders colors
 $main-column-border-clr: rgb(204, 204, 204);
@@ -34,10 +38,13 @@ $hovered-list-header-border-top-clr: rgb(233, 233, 233);
 $hovered-list-header-border-bottom-clr: rgb(230, 230, 230);
 $profile-picture-border-clr: rgb(187, 187, 187);
 $group-header-border-clr: rgb(221, 221, 221);
+$btn-submit-expense-border-clr: rgba(0, 0, 0, 0.1);
 
 // Extra
 $el-br: 5px;
 $main-column-shadow: rgba(0, 0, 0, 0.2) 0px 0px 12px 0px;
+$modal-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+$expense-icon-select-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
 // Breakpoint
 // $break-mobile: 450px;

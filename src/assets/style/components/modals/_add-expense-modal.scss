@@ -1,0 +1,210 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background-color: $group-header-bg-clr;
+  opacity: 0.8;
+}
+
+.add-expense-modal {
+  position: fixed;
+  inset: 50% 50% auto auto;
+  width: 350px;
+
+  border: 1px solid $secondary-font-clr;
+  border-radius: 6px;
+
+  transform: translate(50%, -50%);
+  box-shadow: $modal-shadow;
+  background-color: $surface-clr;
+  z-index: 1;
+
+  .modal-header {
+    padding: em(10px);
+    color: $surface-clr;
+    text-shadow: 0 -1px 0 $main-theme-clr-10;
+    background-color: $main-theme-clr;
+
+    .modal-title {
+      font-size: em(18px);
+      font-family: LatoBold;
+    }
+
+    .btn-close-modal {
+      background-color: transparent;
+
+      &:hover {
+        &::before {
+          color: $main-theme-clr--10;
+        }
+      }
+
+      &::before {
+        @include btnX($surface-clr);
+      }
+    }
+  }
+
+  .with-field {
+    padding: 5px 10px;
+    border-block-end: 1px solid $group-header-bg-clr;
+
+    .with-msg {
+      font-size: em(14px);
+
+      span {
+        font-family: LatoBold;
+      }
+    }
+
+    .input-container {
+      padding: 3px;
+      flex-grow: 1;
+
+      .members-input {
+        width: 100%;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+
+  .description-field {
+    padding: em(10px);
+    border-block-end: 1px solid $group-header-bg-clr;
+
+    .main-details-container {
+      width: 265px;
+      gap: em(16px);
+      margin-block: em(10px);
+
+      .expense-img {
+        width: em(64px);
+        height: em(64px);
+
+        border-radius: $el-br;
+        margin-block: em(10px);
+
+        cursor: pointer;
+        box-shadow: $expense-icon-select-shadow;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+
+      .inputs-container {
+        width: 100%;
+
+        input {
+          border: none;
+
+          &:focus {
+            outline: none;
+          }
+
+          &::placeholder {
+            opacity: 0.3;
+          }
+        }
+
+        .description-input {
+          width: 100%;
+          padding: 4px 3px 2px;
+          border-block-end: 1px dashed $main-column-border-clr;
+          font-size: em(20px);
+        }
+
+        .amount-input-container {
+          width: 100%;
+          align-items: baseline;
+          border-block-end: 1px dashed $main-column-border-clr;
+
+          .ILS-icon {
+            font-size: em(20px);
+          }
+
+          .amount-input {
+            flex-grow: 1;
+            width: 100%;
+
+            padding: 4px 4px 0 4px;
+            font-size: em(36px);
+            font-family: LatoBold;
+          }
+        }
+      }
+    }
+
+    .distribution-field {
+      margin-block: rem(5px) rem(10px);
+      font-size: em(14px);
+      text-align: center;
+
+      .distribution-action {
+        .btn-distribution {
+          @include pillBtn(dashed, $main-theme-clr);
+        }
+      }
+
+      .distribution-msg {
+        margin-block: 3px;
+      }
+    }
+
+    .actions-field {
+      width: 100%;
+      gap: 20px;
+      padding-inline: 5px;
+
+      .btn-action {
+        @include pillBtn(solid);
+        width: 50%;
+        height: rem(24px);
+
+        padding-block-end: 2px;
+        font-size: em(13px);
+      }
+    }
+  }
+
+  .modal-footer {
+    justify-content: end;
+    gap: 6px;
+    padding: em(8px) em(10px);
+
+    .btn {
+      padding: rem(9px) rem(14px);
+      border: 1px solid $btn-submit-expense-border-clr;
+      border-radius: 5px;
+      font-size: em(15px);
+
+      &.btn-cancel {
+        background-color: $list-header-bg-clr;
+        text-shadow: rgba(255, 255, 255, 0.75) 0px 1px 1px;
+
+        &:hover {
+          background-color: $hovered-list-header-border-top-clr;
+        }
+      }
+
+      &.btn-save {
+        text-shadow: 0 -1px 0px $main-theme-clr-10;
+        color: $surface-clr;
+        background-color: $main-theme-clr;
+
+        &:hover {
+          background-color: $main-theme-clr-5;
+        }
+      }
+    }
+  }
+}
