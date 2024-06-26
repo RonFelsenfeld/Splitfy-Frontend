@@ -1,0 +1,42 @@
+.involved-friend-preview {
+  position: relative;
+
+  padding-inline: em(22px) em(4px);
+  border: 1px solid $profile-picture-border-clr;
+  border-radius: 2em;
+
+  background-color: $list-header-bg-clr;
+
+  &:hover {
+    background-color: $group-header-bg-clr;
+    border: 1px solid $expense-decs-clr;
+
+    .btn-remove-friend {
+      &::before {
+        color: $main-font-clr;
+      }
+    }
+  }
+
+  .friend-image {
+    @include profilePicture(em(18px), em(18px));
+
+    position: absolute;
+    left: -1px;
+  }
+
+  .friend-name {
+    font-size: em(14px);
+    font-weight: normal;
+  }
+
+  .btn-remove-friend {
+    margin-inline-start: 2px;
+    background-color: transparent;
+
+    &::before {
+      font-size: em(10px);
+      @include btnX($expense-decs-clr);
+    }
+  }
+}

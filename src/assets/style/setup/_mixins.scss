@@ -128,7 +128,6 @@
 @mixin btnX($color: $btn-remove-clr) {
   font-family: FaSolid;
   content: '\58';
-  font-size: em(16px);
   color: $color;
 }
 

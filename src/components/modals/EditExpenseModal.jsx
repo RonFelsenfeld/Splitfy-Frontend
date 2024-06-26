@@ -4,6 +4,7 @@ import { useClickOutside } from '../../customHooks/useClickOutside'
 import { groupService } from '../../services/group.service.local'
 import { saveGroup } from '../../store/actions/group.actions'
 import { FriendSelector } from '../friend/FriendSelector'
+import { InvolvedFriendList } from '../friend/InvolvedFriendList'
 
 export function EditExpenseModal({ onCloseModal, group }) {
   const [expenseToEdit, setExpenseToEdit] = useState(groupService.getDefaultExpense(group))
@@ -34,6 +35,15 @@ export function EditExpenseModal({ onCloseModal, group }) {
     setMemberFilterBy('')
   }
 
+  function onRemoveMember(memberId) {
+    const { membersInvolvedIds } = expenseToEdit
+
+    setExpenseToEdit(prevExpenseToEdit => ({
+      ...prevExpenseToEdit,
+      membersInvolvedIds: membersInvolvedIds.filter(id => id !== memberId),
+    }))
+  }
+
   // todo - show user msg
   async function onSaveExpense() {
     console.log(expenseToEdit)
@@ -48,11 +58,16 @@ export function EditExpenseModal({ onCloseModal, group }) {
     // }
   }
 
-  function getMemberDetails(memberId) {
-    const member = group.members.find(m => m._id === memberId)
-    if (!member) throw new Error('Cannot find member')
-    return member
+  function getInvolvedMembersFullDetails() {
+    const { membersInvolvedIds } = expenseToEdit
+
+    return membersInvolvedIds.map(memberId => {
+      const fullMember = group.members.find(m => m._id === memberId)
+      return fullMember
+    })
   }
+
+  const { membersInvolvedIds } = expenseToEdit
 
   return (
     <>
@@ -70,7 +85,13 @@ export function EditExpenseModal({ onCloseModal, group }) {
           </p>
 
           <div className="input-container flex align-center wrap">
-            <pre>{JSON.stringify(expenseToEdit.membersInvolvedIds)}</pre>
+            {!!membersInvolvedIds.length && (
+              <InvolvedFriendList
+                friends={getInvolvedMembersFullDetails()}
+                onRemoveMember={onRemoveMember}
+              />
+            )}
+
             <input
               type="text"
               className="members-input"

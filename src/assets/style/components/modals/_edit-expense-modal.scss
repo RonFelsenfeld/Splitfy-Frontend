@@ -28,6 +28,7 @@
 
     .with-msg {
       font-size: em(14px);
+      white-space: nowrap;
 
       span {
         font-family: LatoBold;
@@ -35,11 +36,12 @@
     }
 
     .input-container {
-      padding: 3px;
       flex-grow: 1;
+      gap: 10px;
+      padding: 3px;
 
       .members-input {
-        width: 100%;
+        flex-grow: 1;
         border: none;
 
         &:focus {
