@@ -1,17 +1,45 @@
-import { useRef } from 'react'
-import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useRef, useState } from 'react'
 
-export function AddExpenseModal({ onCloseModal }) {
+import { useClickOutside } from '../../customHooks/useClickOutside'
+import { groupService } from '../../services/group.service.local'
+import { saveGroup } from '../../store/actions/group.actions'
+
+export function EditExpenseModal({ onCloseModal, group }) {
+  const [expenseToEdit, setExpenseToEdit] = useState(groupService.getEmptyExpense())
   const modalRef = useRef()
 
   useClickOutside(modalRef, onCloseModal)
-  function handleChange(ev) {}
+
+  function handleChange({ target }) {
+    let { value, name: field, type } = target
+
+    if (type === 'number') value = +value || 0
+
+    setExpenseToEdit(prevExpenseToEdit => ({
+      ...prevExpenseToEdit,
+      [field]: value,
+    }))
+  }
+
+  // todo - show user msg
+  async function onSaveExpense() {
+    console.log(expenseToEdit)
+    // group.expenses.push(expenseToEdit)
+
+    // try {
+    //   await saveGroup(group)
+    // } catch (err) {
+    //   console.log('Had issues with saving expense:', err)
+    // } finally {
+    //   onCloseModal()
+    // }
+  }
 
   return (
     <>
       <div className="modal-backdrop"></div>
 
-      <section className="add-expense-modal" ref={modalRef}>
+      <section className="edit-expense-modal" ref={modalRef}>
         <header className="modal-header flex align-center justify-between">
           <h1 className="modal-title">Add an expense</h1>
           <button className="btn-close-modal" onClick={onCloseModal}></button>
@@ -43,9 +71,11 @@ export function AddExpenseModal({ onCloseModal }) {
             <div className="inputs-container">
               <input
                 type="text"
+                name="title"
                 className="description-input"
                 placeholder="Enter a description"
                 onChange={handleChange}
+                value={expenseToEdit.title}
               />
 
               <div className="amount-input-container flex">
@@ -53,9 +83,11 @@ export function AddExpenseModal({ onCloseModal }) {
 
                 <input
                   type="number"
+                  name="amount"
                   className="amount-input"
                   placeholder="0.00"
                   onChange={handleChange}
+                  value={expenseToEdit.amount || ''}
                 />
               </div>
             </div>
@@ -79,8 +111,12 @@ export function AddExpenseModal({ onCloseModal }) {
         </div>
 
         <footer className="modal-footer flex">
-          <button className="btn btn-cancel">Cancel</button>
-          <button className="btn btn-save">Save</button>
+          <button className="btn btn-cancel" onClick={onCloseModal}>
+            Cancel
+          </button>
+          <button className="btn btn-save" onClick={onSaveExpense}>
+            Save
+          </button>
         </footer>
       </section>
     </>

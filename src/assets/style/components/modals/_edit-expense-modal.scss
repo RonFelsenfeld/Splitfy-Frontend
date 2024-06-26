@@ -7,7 +7,7 @@
   opacity: 0.8;
 }
 
-.add-expense-modal {
+.edit-expense-modal {
   position: fixed;
   inset: 50% 50% auto auto;
   width: 350px;
@@ -21,29 +21,7 @@
   z-index: 1;
 
   .modal-header {
-    padding: em(10px);
-    color: $surface-clr;
-    text-shadow: 0 -1px 0 $main-theme-clr-10;
-    background-color: $main-theme-clr;
-
-    .modal-title {
-      font-size: em(18px);
-      font-family: LatoBold;
-    }
-
-    .btn-close-modal {
-      background-color: transparent;
-
-      &:hover {
-        &::before {
-          color: $main-theme-clr--10;
-        }
-      }
-
-      &::before {
-        @include btnX($surface-clr);
-      }
-    }
+    @include modalHeader;
   }
 
   .with-field {
