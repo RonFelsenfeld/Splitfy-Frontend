@@ -9,6 +9,7 @@ export const groupService = {
   getById,
   remove,
   save,
+  removeExpense,
   getEmptyGroup,
   getEmptyExpense,
   getAllFriendsFromGroups,
@@ -39,6 +40,17 @@ function save(group) {
   } else {
     return storageService.post(GROUPS_KEY, group)
   }
+}
+
+////////////////////////////////////////////////////
+
+function removeExpense(group, expenseId) {
+  const expenseIdx = group.expenses.findIndex(expense => expense._id === expenseId)
+  if (expenseIdx < 0) {
+    throw new Error(`Update failed, cannot find task with id: ${taskId}`)
+  }
+  group.expenses.splice(expenseIdx, 1)
+  return save(group)
 }
 
 ////////////////////////////////////////////////////

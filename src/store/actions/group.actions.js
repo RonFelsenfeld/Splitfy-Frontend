@@ -48,3 +48,14 @@ export async function saveGroup(group) {
     throw err
   }
 }
+
+export async function removeExpense(group, expenseId) {
+  try {
+    const savedGroup = await groupService.removeExpense(group, expenseId)
+    store.dispatch({ type: EDIT_GROUP, group: savedGroup })
+    return savedGroup
+  } catch (err) {
+    console.log('GROUP ACTIONS -> Had issues with removing expense:', err)
+    throw err
+  }
+}

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { loadGroup } from '../../store/actions/group.actions'
+import { loadGroup, removeExpense } from '../../store/actions/group.actions'
 
 import { EmptyExpenses } from '../general/EmptyExpenses'
 import { ExpenseList } from '../expense/ExpenseList'
-import { AddExpenseModal } from '../modals/AddExpenseModal'
+import { EditExpenseModal } from '../modals/EditExpenseModal'
 
 export function GroupDetails() {
   const [isAddingExpense, setIsAddingExpense] = useState(true)
@@ -15,6 +15,15 @@ export function GroupDetails() {
   useEffect(() => {
     loadGroup(groupId)
   }, [groupId])
+
+  // todo - show user msg
+  async function onRemoveExpense(expenseId) {
+    try {
+      await removeExpense(group, expenseId)
+    } catch (err) {
+      console.log('Had issues with removing expense:', err)
+    }
+  }
 
   if (!group) return <div>Loading group...</div>
 
@@ -36,9 +45,15 @@ export function GroupDetails() {
         </button>
       </header>
 
-      {expenses.length ? <ExpenseList expenses={expenses} /> : <EmptyExpenses />}
+      {expenses.length ? (
+        <ExpenseList expenses={expenses} onRemoveExpense={onRemoveExpense} />
+      ) : (
+        <EmptyExpenses />
+      )}
 
-      {isAddingExpense && <AddExpenseModal onCloseModal={() => setIsAddingExpense(false)} />}
+      {isAddingExpense && (
+        <EditExpenseModal onCloseModal={() => setIsAddingExpense(false)} group={group} />
+      )}
     </section>
   )
 }

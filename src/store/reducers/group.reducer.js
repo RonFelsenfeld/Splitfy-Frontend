@@ -40,6 +40,7 @@ export function groupReducer(state = initialState, action = {}) {
       return {
         ...state,
         groups: state.groups.map(g => (g._id === group._id ? group : g)),
+        currentGroup: { ...action.group },
       }
 
     default:

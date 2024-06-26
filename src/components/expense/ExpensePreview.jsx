@@ -1,6 +1,6 @@
 import { utilService } from '../../services/util.service'
 
-export function ExpensePreview({ expense }) {
+export function ExpensePreview({ expense, onRemoveExpense }) {
   function getFormattedDebtDistribution() {
     const { amount, involvedMembersIds } = expense
 
@@ -32,7 +32,7 @@ export function ExpensePreview({ expense }) {
       <p className="lent-desc">SOMEONE lent</p>
       <span className="lent-amount">{getFormattedDebtDistribution()}</span>
 
-      <button className="btn-remove-expense"></button>
+      <button className="btn-remove-expense" onClick={() => onRemoveExpense(expense._id)}></button>
     </article>
   )
 }
