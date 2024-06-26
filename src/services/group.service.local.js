@@ -12,8 +12,8 @@ export const groupService = {
   getExpenseById,
   removeExpense,
   saveExpense,
-  getEmptyGroup,
-  getEmptyExpense,
+  getDefaultGroup,
+  getDefaultExpense,
   getAllFriendsFromGroups,
 }
 
@@ -85,7 +85,7 @@ function _updateExpense(group, expense) {
 
 ////////////////////////////////////////////////////
 
-function getEmptyGroup() {
+function getDefaultGroup() {
   return {
     title: '',
     imgUrl: null,
@@ -95,12 +95,13 @@ function getEmptyGroup() {
   }
 }
 
-function getEmptyExpense() {
+function getDefaultExpense(group) {
   return {
     title: '',
     amount: 0,
     at: null,
     paidBy: null,
+    // membersInvolvedIds: group.members.map(m => m._id), // ! The default behavior is that in new expense everyone is involved
     membersInvolvedIds: [],
     notes: [],
   }
@@ -135,7 +136,7 @@ function _createDemoGroups() {
 }
 
 function _createDemoGroup(title) {
-  const group = getEmptyGroup()
+  const group = getDefaultGroup()
 
   group._id = utilService.makeId()
   group.title = title

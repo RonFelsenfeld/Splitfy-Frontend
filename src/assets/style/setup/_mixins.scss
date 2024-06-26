@@ -111,9 +111,9 @@
   white-space: nowrap;
 }
 
-@mixin profilePicture() {
-  width: em(34px);
-  height: em(34px);
+@mixin profilePicture($width: em(34px), $height: em(34px)) {
+  width: $width;
+  height: $height;
 
   border: 1px solid $profile-picture-border-clr;
   border-radius: 50%;
@@ -143,6 +143,15 @@
   &:hover {
     background-color: $expense-border-clr;
   }
+}
+
+@mixin modal {
+  border: 1px solid $secondary-font-clr;
+  border-radius: 6px;
+
+  box-shadow: $modal-shadow;
+  background-color: $surface-clr;
+  z-index: 1;
 }
 
 @mixin modalHeader {

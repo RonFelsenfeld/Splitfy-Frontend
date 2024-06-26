@@ -1,0 +1,19 @@
+.friend-selector {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+  border-block: 1px solid $profile-picture-border-clr;
+
+  background-color: $surface-clr;
+  z-index: 1;
+
+  .friend-select {
+    &.not-found {
+      font-size: em(13px);
+      color: $secondary-font-clr;
+      opacity: 0.7;
+    }
+  }
+}

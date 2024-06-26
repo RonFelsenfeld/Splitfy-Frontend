@@ -9,6 +9,7 @@ export const utilService = {
   getMonthFromTimestamp,
   getDateFromTimestamp,
   getFormattedCurrency,
+  getFormattedRegex,
 }
 
 function makeId(length = 6) {
@@ -75,4 +76,8 @@ function getDateFromTimestamp(timestamp) {
 function getFormattedCurrency(amount) {
   const IsraelShekels = new Intl.NumberFormat('en-us', { style: 'currency', currency: 'ILS' })
   return IsraelShekels.format(amount)
+}
+
+function getFormattedRegex(str) {
+  return str.replace(/[.*+?^${}(|[\]\\]/g, '\\$&')
 }

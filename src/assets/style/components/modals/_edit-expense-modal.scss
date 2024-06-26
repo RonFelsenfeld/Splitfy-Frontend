@@ -8,23 +8,21 @@
 }
 
 .edit-expense-modal {
+  @include modal;
+
   position: fixed;
   inset: 50% 50% auto auto;
   width: 350px;
-
-  border: 1px solid $secondary-font-clr;
-  border-radius: 6px;
-
   transform: translate(50%, -50%);
-  box-shadow: $modal-shadow;
-  background-color: $surface-clr;
-  z-index: 1;
 
   .modal-header {
     @include modalHeader;
   }
 
   .with-field {
+    position: relative;
+    align-items: baseline;
+
     padding: 5px 10px;
     border-block-end: 1px solid $group-header-bg-clr;
 

@@ -3,22 +3,35 @@ import { useRef, useState } from 'react'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { groupService } from '../../services/group.service.local'
 import { saveGroup } from '../../store/actions/group.actions'
+import { FriendSelector } from '../friend/FriendSelector'
 
 export function EditExpenseModal({ onCloseModal, group }) {
-  const [expenseToEdit, setExpenseToEdit] = useState(groupService.getEmptyExpense())
+  const [expenseToEdit, setExpenseToEdit] = useState(groupService.getDefaultExpense(group))
+  const [memberFilterBy, setMemberFilterBy] = useState('')
   const modalRef = useRef()
 
   useClickOutside(modalRef, onCloseModal)
 
   function handleChange({ target }) {
     let { value, name: field, type } = target
-
     if (type === 'number') value = +value || 0
 
     setExpenseToEdit(prevExpenseToEdit => ({
       ...prevExpenseToEdit,
       [field]: value,
     }))
+  }
+
+  function onSetMemberFilterBy({ target }) {
+    setMemberFilterBy(target.value)
+  }
+
+  function onSelectMember(memberId) {
+    setExpenseToEdit(prevExpenseToEdit => ({
+      ...prevExpenseToEdit,
+      membersInvolvedIds: [...prevExpenseToEdit.membersInvolvedIds, memberId],
+    }))
+    setMemberFilterBy('')
   }
 
   // todo - show user msg
@@ -35,6 +48,12 @@ export function EditExpenseModal({ onCloseModal, group }) {
     // }
   }
 
+  function getMemberDetails(memberId) {
+    const member = group.members.find(m => m._id === memberId)
+    if (!member) throw new Error('Cannot find member')
+    return member
+  }
+
   return (
     <>
       <div className="modal-backdrop"></div>
@@ -45,18 +64,29 @@ export function EditExpenseModal({ onCloseModal, group }) {
           <button className="btn-close-modal" onClick={onCloseModal}></button>
         </header>
 
-        <div className="with-field flex align-center">
+        <div className="with-field flex">
           <p className="with-msg">
             With <span>you</span> and:
           </p>
 
-          <div className="input-container">
+          <div className="input-container flex align-center wrap">
+            <pre>{JSON.stringify(expenseToEdit.membersInvolvedIds)}</pre>
             <input
               type="text"
               className="members-input"
               placeholder="Enter member name"
-              onChange={handleChange}
+              onChange={onSetMemberFilterBy}
+              value={memberFilterBy}
             />
+
+            {memberFilterBy && (
+              <FriendSelector
+                friends={group.members}
+                expenseToEdit={expenseToEdit}
+                memberFilterBy={memberFilterBy}
+                onSelectMember={onSelectMember}
+              />
+            )}
           </div>
         </div>
 
