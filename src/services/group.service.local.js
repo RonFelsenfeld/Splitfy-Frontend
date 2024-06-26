@@ -9,7 +9,9 @@ export const groupService = {
   getById,
   remove,
   save,
+  getExpenseById,
   removeExpense,
+  saveExpense,
   getEmptyGroup,
   getEmptyExpense,
   getAllFriendsFromGroups,
@@ -44,12 +46,40 @@ function save(group) {
 
 ////////////////////////////////////////////////////
 
+function getExpenseById(group, expenseId) {
+  const expense = group.expenses.find(e => e._id === expenseId)
+  return expense
+}
+
 function removeExpense(group, expenseId) {
   const expenseIdx = group.expenses.findIndex(expense => expense._id === expenseId)
   if (expenseIdx < 0) {
-    throw new Error(`Update failed, cannot find task with id: ${taskId}`)
+    throw new Error(`Update failed, cannot find expense with id: ${expenseId}`)
   }
   group.expenses.splice(expenseIdx, 1)
+  return save(group)
+}
+
+function saveExpense(group, expense) {
+  if (expense._id) {
+    return _updateExpense(group, expense)
+  } else {
+    return _addExpense(group, expense)
+  }
+}
+
+function _addExpense(group, expense) {
+  expense._id = utilService.makeId()
+  group.expenses.push(expense)
+  return save(group)
+}
+
+function _updateExpense(group, expense) {
+  const expenseIdx = group.expenses.findIndex(e => e._id === expense._id)
+  if (expenseIdx < 0) {
+    throw new Error(`Update failed, cannot find expense with id: ${expense._id}`)
+  }
+  group.expenses.splice(expenseIdx, 1, expense)
   return save(group)
 }
 
