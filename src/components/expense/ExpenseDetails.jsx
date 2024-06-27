@@ -1,10 +1,20 @@
+import { useRef } from 'react'
 import { utilService } from '../../services/util.service'
 
 export function ExpenseDetails({ expense, isDetailsShown, onEditExpense }) {
-  const { title, amount, createdAt, lastUpdated } = expense
+  const detailsRef = useRef()
 
+  function getDetailsHeight() {
+    return isDetailsShown ? detailsRef.current.scrollHeight : 0
+  }
+
+  const { title, amount, createdAt, lastUpdated } = expense
   return (
-    <section className={`expense-details ${isDetailsShown ? 'open' : ''}`}>
+    <section
+      ref={detailsRef}
+      style={{ height: getDetailsHeight() }}
+      className={`expense-details ${isDetailsShown ? 'open' : ''}`}
+    >
       <header className="details-header flex">
         <img
           src="/assets/img/expense-icons/uncategorized.png"

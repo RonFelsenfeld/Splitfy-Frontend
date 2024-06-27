@@ -1,14 +1,14 @@
 .expense-details {
+  height: 0;
+  overflow: hidden;
+  padding-inline: em(15px);
+
   background-color: $hovered-expense-bg-clr;
   box-shadow: $expense-details-shadow;
-
-  overflow: hidden;
-  height: 0;
-  transition: height 0.3s ease;
+  transition: all 0.3s;
 
   &.open {
-    padding: em(15px);
-    height: 100%;
+    padding-block: em(15px);
   }
 
   .details-header {

@@ -51,14 +51,11 @@ export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
           onClick={() => onRemoveExpense(expense._id)}
         ></button>
       </article>
-
-      {isDetailsShown && (
-        <ExpenseDetails
-          expense={expense}
-          isDetailsShown={isDetailsShown}
-          onEditExpense={onEditExpense}
-        />
-      )}
+      <ExpenseDetails
+        expense={expense}
+        isDetailsShown={isDetailsShown}
+        onEditExpense={onEditExpense}
+      />
     </>
   )
 }
