@@ -1,10 +1,10 @@
-import { DatePicker } from '../general/DatePicker'
+import { DatePickerField } from '../general/DatePickerField'
 import { NotesField } from '../general/NotesField'
 
 export function DynamicModalContent(cmp) {
   switch (cmp.type) {
     case 'datePicker':
-      return <DatePicker {...cmp} />
+      return <DatePickerField {...cmp} />
 
     case 'notesField':
       return <NotesField {...cmp} />

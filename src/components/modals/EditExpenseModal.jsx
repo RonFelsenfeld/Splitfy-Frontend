@@ -51,7 +51,8 @@ export function EditExpenseModal({ onCloseModal, group }) {
     const cmpOptions = {
       type: 'datePicker',
       title: 'Choose date',
-      onSubmit: () => console.log('submitted date'),
+      currentDate: expenseToEdit.at,
+      onSubmit: date => setExpenseToEdit(prevExpense => ({ ...prevExpense, at: date })),
     }
     showModal(cmpOptions)
   }

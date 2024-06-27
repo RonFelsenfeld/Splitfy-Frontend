@@ -15,13 +15,15 @@ export function NotesField({ onSubmit }) {
 
   return (
     <section className="notes-field flex column">
-      <textarea
-        name="notes"
-        id="notes"
-        placeholder="Add notes"
-        onChange={handleChange}
-        value={notes}
-      ></textarea>
+      <div className="textarea-container">
+        <textarea
+          name="notes"
+          id="notes"
+          placeholder="Add notes"
+          onChange={handleChange}
+          value={notes}
+        ></textarea>
+      </div>
 
       <button className="btn-save-notes" onClick={onSaveNotes}>
         Done
