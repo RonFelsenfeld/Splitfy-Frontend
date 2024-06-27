@@ -14,7 +14,9 @@ export const groupService = {
   saveExpense,
   getDefaultGroup,
   getDefaultExpense,
+  getMembersFullDetails,
   getAllFriendsFromGroups,
+  getExpenseDistribution,
 }
 
 async function query() {
@@ -99,12 +101,19 @@ function getDefaultExpense(group) {
   return {
     title: '',
     amount: 0,
-    at: null,
+    at: Date.now(),
     paidBy: null,
     // membersInvolvedIds: group.members.map(m => m._id), // ! The default behavior is that in new expense everyone is involved
     membersInvolvedIds: [],
     notes: [],
   }
+}
+
+function getMembersFullDetails(group, memberIds) {
+  return memberIds.map(memberId => {
+    const fullMember = group.members.find(m => m._id === memberId)
+    return fullMember
+  })
 }
 
 function getAllFriendsFromGroups(groups) {
@@ -114,6 +123,11 @@ function getAllFriendsFromGroups(groups) {
   }, [])
 
   return friends.sort((f1, f2) => f1.fullName.localeCompare(f2.fullName))
+}
+
+function getExpenseDistribution({ amount, membersInvolvedIds }) {
+  const totalPerMember = (amount / (membersInvolvedIds.length + 1)).toFixed(2)
+  return utilService.getFormattedCurrency(totalPerMember)
 }
 
 ////////////////////////////////////////////////////

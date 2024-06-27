@@ -8,7 +8,7 @@ import { ExpenseList } from '../expense/ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
 
 export function GroupDetails() {
-  const [isAddingExpense, setIsAddingExpense] = useState(true)
+  const [isAddingExpense, setIsAddingExpense] = useState(false)
   const group = useSelector(store => store.groupModule.currentGroup)
   const { groupId } = useParams()
 

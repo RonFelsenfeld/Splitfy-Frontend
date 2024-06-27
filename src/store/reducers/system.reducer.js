@@ -5,7 +5,6 @@ const initialState = {
   modal: {
     isOpen: false,
     cmp: null,
-    title: '',
   },
 }
 
@@ -20,11 +19,7 @@ export function systemReducer(state = initialState, action = {}) {
     case HIDE_MODAL:
       return {
         ...state,
-        modal: {
-          isOpen: false,
-          cmp: null,
-          title: '',
-        },
+        modal: { isOpen: false, cmp: null },
       }
 
     default:

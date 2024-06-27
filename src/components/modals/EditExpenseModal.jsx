@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react'
 
-import { useClickOutside } from '../../customHooks/useClickOutside'
 import { groupService } from '../../services/group.service.local'
-import { saveGroup } from '../../store/actions/group.actions'
+import { useClickOutside } from '../../customHooks/useClickOutside'
+import { showModal } from '../../store/actions/system.actions'
+
 import { FriendSelector } from '../friend/FriendSelector'
 import { InvolvedFriendList } from '../friend/InvolvedFriendList'
+import { DynamicModal } from './DynamicModal'
+import { utilService } from '../../services/util.service'
 
 export function EditExpenseModal({ onCloseModal, group }) {
   const [expenseToEdit, setExpenseToEdit] = useState(groupService.getDefaultExpense(group))
@@ -28,9 +31,9 @@ export function EditExpenseModal({ onCloseModal, group }) {
   }
 
   function onSelectMember(memberId) {
-    setExpenseToEdit(prevExpenseToEdit => ({
-      ...prevExpenseToEdit,
-      membersInvolvedIds: [...prevExpenseToEdit.membersInvolvedIds, memberId],
+    setExpenseToEdit(prevExpense => ({
+      ...prevExpense,
+      membersInvolvedIds: [...prevExpense.membersInvolvedIds, memberId],
     }))
     setMemberFilterBy('')
   }
@@ -38,10 +41,28 @@ export function EditExpenseModal({ onCloseModal, group }) {
   function onRemoveMember(memberId) {
     const { membersInvolvedIds } = expenseToEdit
 
-    setExpenseToEdit(prevExpenseToEdit => ({
-      ...prevExpenseToEdit,
+    setExpenseToEdit(prevExpense => ({
+      ...prevExpense,
       membersInvolvedIds: membersInvolvedIds.filter(id => id !== memberId),
     }))
+  }
+
+  function onDatePickerClick() {
+    const cmpOptions = {
+      type: 'datePicker',
+      title: 'Choose date',
+      onSubmit: () => console.log('submitted date'),
+    }
+    showModal(cmpOptions)
+  }
+
+  function onNotesFieldClick() {
+    const cmpOptions = {
+      type: 'notesField',
+      title: 'Add notes',
+      onSubmit: notes => setExpenseToEdit(prevExpense => ({ ...prevExpense, notes })),
+    }
+    showModal(cmpOptions)
   }
 
   // todo - show user msg
@@ -58,16 +79,7 @@ export function EditExpenseModal({ onCloseModal, group }) {
     // }
   }
 
-  function getInvolvedMembersFullDetails() {
-    const { membersInvolvedIds } = expenseToEdit
-
-    return membersInvolvedIds.map(memberId => {
-      const fullMember = group.members.find(m => m._id === memberId)
-      return fullMember
-    })
-  }
-
-  const { membersInvolvedIds } = expenseToEdit
+  const { membersInvolvedIds, at } = expenseToEdit
 
   return (
     <>
@@ -87,7 +99,7 @@ export function EditExpenseModal({ onCloseModal, group }) {
           <div className="input-container flex align-center wrap">
             {!!membersInvolvedIds.length && (
               <InvolvedFriendList
-                friends={getInvolvedMembersFullDetails()}
+                friends={groupService.getMembersFullDetails(group, membersInvolvedIds)}
                 onRemoveMember={onRemoveMember}
               />
             )}
@@ -152,12 +164,18 @@ export function EditExpenseModal({ onCloseModal, group }) {
               <button className="btn-distribution">equally</button>.
             </p>
 
-            <p className="distribution-msg">(Distribution MSG)</p>
+            <p className="distribution-msg">
+              {`(${groupService.getExpenseDistribution(expenseToEdit)}/person`}
+            </p>
           </div>
 
           <div className="actions-field flex">
-            <button className="btn-action">DATE</button>
-            <button className="btn-action">Add notes</button>
+            <button className="btn-action" onClick={onDatePickerClick}>
+              {utilService.getFormattedTimeStr(at)}
+            </button>
+            <button className="btn-action" onClick={onNotesFieldClick}>
+              Add notes
+            </button>
           </div>
         </div>
 
@@ -169,6 +187,8 @@ export function EditExpenseModal({ onCloseModal, group }) {
             Save
           </button>
         </footer>
+
+        <DynamicModal />
       </section>
     </>
   )

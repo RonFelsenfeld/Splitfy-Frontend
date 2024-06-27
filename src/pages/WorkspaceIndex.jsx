@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import { Outlet } from 'react-router'
 
-import { loadGroups } from '../../../store/actions/group.actions'
-
-import { Sidebar } from '../../../components/sidebar/Sidebar'
+import { loadGroups } from '../store/actions/group.actions'
+import { Sidebar } from '../components/sidebar/Sidebar'
 
 export function WorkspaceIndex() {
   useEffect(() => {

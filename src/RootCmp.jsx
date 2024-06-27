@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { store } from './store/store'
 
+import { WorkspaceIndex } from './pages/WorkspaceIndex'
 import { AppHeader } from './components/general/AppHeader'
-import { WorkspaceIndex } from './assets/style/pages/WorkspaceIndex'
 import { GroupDetails } from './components/group/GroupDetails'
 
 export function App() {

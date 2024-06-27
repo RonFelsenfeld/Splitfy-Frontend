@@ -8,6 +8,7 @@ export const utilService = {
   getShortenName,
   getMonthFromTimestamp,
   getDateFromTimestamp,
+  getFormattedTimeStr,
   getFormattedCurrency,
   getFormattedRegex,
 }
@@ -71,6 +72,12 @@ function getMonthFromTimestamp(timestamp) {
 function getDateFromTimestamp(timestamp) {
   const date = new Date(timestamp)
   return date.getDate()
+}
+
+function getFormattedTimeStr(timestamp) {
+  const date = new Date(timestamp)
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  return date.toLocaleDateString('en-US', options)
 }
 
 function getFormattedCurrency(amount) {

@@ -178,3 +178,15 @@
     }
   }
 }
+
+@mixin btnAction($bgc: transparent, $color: $surface-clr) {
+  padding: rem(9px) rem(14px);
+  border-radius: $el-br;
+  border-width: 1px;
+  border-style: solid;
+
+  font-size: em(15px);
+  color: $surface-clr;
+  background-color: $bgc;
+  box-shadow: $btn-action-shadow;
+}

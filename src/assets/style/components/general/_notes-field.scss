@@ -1,0 +1,40 @@
+.notes-field {
+  textarea {
+    min-width: 270px;
+    min-height: 140px;
+
+    padding: 4px;
+    border: 1px solid $textarea-border-clr;
+    border-radius: 3px;
+    margin-block: 15px;
+    margin-inline: 10px 40px;
+
+    font-size: em(13px);
+    color: $textarea-font-clr;
+    font-family: $main-font-family;
+    line-height: rem(18px);
+
+    transition: all 0.3s;
+
+    &::placeholder {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: $textarea-focus-border-clr;
+      box-shadow: $textarea-focus-shadow;
+    }
+  }
+
+  .btn-save-notes {
+    @include btnAction($main-theme-clr);
+    margin-inline: auto 10px;
+    margin-block-end: 10px;
+    text-shadow: 0 -1px 0px $main-theme-clr-10;
+
+    &:hover {
+      background-color: $main-theme-clr-5;
+    }
+  }
+}

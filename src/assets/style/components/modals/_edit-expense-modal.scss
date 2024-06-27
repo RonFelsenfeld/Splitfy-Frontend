@@ -1,8 +1,10 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
+
   width: 100vw;
   height: 100dvh;
+
   background-color: $group-header-bg-clr;
   opacity: 0.8;
 }
@@ -160,14 +162,13 @@
     padding: em(8px) em(10px);
 
     .btn {
-      padding: rem(9px) rem(14px);
-      border: 1px solid $btn-submit-expense-border-clr;
-      border-radius: 5px;
-      font-size: em(15px);
+      @include btnAction;
+      border-color: $btn-submit-expense-border-clr;
 
       &.btn-cancel {
-        background-color: $list-header-bg-clr;
+        color: $main-font-clr;
         text-shadow: rgba(255, 255, 255, 0.75) 0px 1px 1px;
+        background-color: $list-header-bg-clr;
 
         &:hover {
           background-color: $hovered-list-header-border-top-clr;
@@ -176,7 +177,6 @@
 
       &.btn-save {
         text-shadow: 0 -1px 0px $main-theme-clr-10;
-        color: $surface-clr;
         background-color: $main-theme-clr;
 
         &:hover {
