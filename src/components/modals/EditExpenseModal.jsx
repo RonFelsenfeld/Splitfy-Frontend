@@ -1,30 +1,22 @@
 import { useRef, useState } from 'react'
 
 import { groupService } from '../../services/group.service.local'
+import { utilService } from '../../services/util.service'
+
 import { useClickOutside } from '../../customHooks/useClickOutside'
+import { useForm } from '../../customHooks/useForm'
 import { showModal } from '../../store/actions/system.actions'
 
 import { FriendSelector } from '../friend/FriendSelector'
 import { InvolvedFriendList } from '../friend/InvolvedFriendList'
 import { DynamicModal } from './DynamicModal'
-import { utilService } from '../../services/util.service'
 
 export function EditExpenseModal({ onCloseModal, group }) {
-  const [expenseToEdit, setExpenseToEdit] = useState(groupService.getDefaultExpense(group))
+  const [expenseToEdit, handleChange, setExpenseToEdit] = useForm(groupService.getDefaultExpense())
   const [memberFilterBy, setMemberFilterBy] = useState('')
   const modalRef = useRef()
 
   useClickOutside(modalRef, onCloseModal)
-
-  function handleChange({ target }) {
-    let { value, name: field, type } = target
-    if (type === 'number') value = +value || 0
-
-    setExpenseToEdit(prevExpenseToEdit => ({
-      ...prevExpenseToEdit,
-      [field]: value,
-    }))
-  }
 
   function onSetMemberFilterBy({ target }) {
     setMemberFilterBy(target.value)
@@ -68,7 +60,10 @@ export function EditExpenseModal({ onCloseModal, group }) {
 
   // todo - show user msg
   async function onSaveExpense() {
-    console.log(expenseToEdit)
+    const { membersInvolvedIds, title, amount } = expenseToEdit
+    if (!membersInvolvedIds.length) return alert('Must have at least one member (expect you)')
+    if (!title) return alert('Must enter title')
+    if (!amount) return alert('Must enter amount')
     // group.expenses.push(expenseToEdit)
 
     // try {
@@ -80,8 +75,7 @@ export function EditExpenseModal({ onCloseModal, group }) {
     // }
   }
 
-  const { membersInvolvedIds, at } = expenseToEdit
-
+  const { title, amount, membersInvolvedIds, at } = expenseToEdit
   return (
     <>
       <div className="modal-backdrop"></div>
@@ -139,7 +133,7 @@ export function EditExpenseModal({ onCloseModal, group }) {
                 className="description-input"
                 placeholder="Enter a description"
                 onChange={handleChange}
-                value={expenseToEdit.title}
+                value={title}
               />
 
               <div className="amount-input-container flex">
@@ -151,7 +145,7 @@ export function EditExpenseModal({ onCloseModal, group }) {
                   className="amount-input"
                   placeholder="0.00"
                   onChange={handleChange}
-                  value={expenseToEdit.amount || ''}
+                  value={amount || ''}
                 />
               </div>
             </div>
