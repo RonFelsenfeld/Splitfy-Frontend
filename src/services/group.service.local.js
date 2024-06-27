@@ -72,6 +72,9 @@ function saveExpense(group, expense) {
 
 function _addExpense(group, expense) {
   expense._id = utilService.makeId()
+  expense.createdAt = Date.now()
+  expense.lastUpdated = Date.now()
+
   group.expenses.push(expense)
   return save(group)
 }
@@ -81,6 +84,8 @@ function _updateExpense(group, expense) {
   if (expenseIdx < 0) {
     throw new Error(`Update failed, cannot find expense with id: ${expense._id}`)
   }
+
+  expense.lastUpdated = Date.now()
   group.expenses.splice(expenseIdx, 1, expense)
   return save(group)
 }
@@ -235,7 +240,8 @@ function _generateDemoExpense(expense, members) {
   newExpense.involvedMembersIds = rndInvolvedMembers.map(m => m._id)
 
   // ! Generating random timestamp
-  newExpense.at = utilService.getRandomTimestampLastMonth()
+  const rndTimestamp = utilService.getRandomTimestampLastMonth()
+  newExpense.at = newExpense.createdAt = newExpense.lastUpdated = rndTimestamp
 
   return newExpense
 }

@@ -1,0 +1,61 @@
+.expense-details {
+  background-color: $hovered-expense-bg-clr;
+  box-shadow: $expense-details-shadow;
+
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+
+  &.open {
+    padding: em(15px);
+    height: 100%;
+  }
+
+  .details-header {
+    align-items: start;
+    gap: 10px;
+
+    padding-block-end: 15px;
+    border-block-end: 1px solid $group-header-border-clr;
+
+    * {
+      font-weight: normal;
+    }
+
+    .expense-icon {
+      width: em(86px);
+    }
+
+    .expense-title {
+      @include overflowTxt;
+
+      font-size: em(16px);
+      line-height: rem(27px);
+    }
+
+    .expense-amount {
+      font-size: em(20px);
+      font-family: LatoBold;
+    }
+
+    .expense-time {
+      font-size: em(12px);
+      color: $secondary-font-clr;
+      line-height: rem(18px);
+    }
+
+    .btn-edit-expense {
+      @include btnAction($secondary-theme-clr);
+
+      padding: 2px 6px;
+      border-color: $btn-action-border-clr;
+
+      font-size: em(12px);
+      text-shadow: 0 -1px 0 $secondary-theme-clr-20;
+
+      &:hover {
+        background-color: $secondary-theme-clr-10;
+      }
+    }
+  }
+}

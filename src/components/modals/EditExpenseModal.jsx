@@ -5,7 +5,6 @@ import { utilService } from '../../services/util.service'
 
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useForm } from '../../customHooks/useForm'
-
 import { addExpenseToGroup } from '../../store/actions/group.actions'
 import { showModal } from '../../store/actions/system.actions'
 
@@ -13,8 +12,8 @@ import { FriendSelector } from '../friend/FriendSelector'
 import { InvolvedFriendList } from '../friend/InvolvedFriendList'
 import { DynamicModal } from './DynamicModal'
 
-export function EditExpenseModal({ onCloseModal, group }) {
-  const [expenseToEdit, handleChange, setExpenseToEdit] = useForm(groupService.getDefaultExpense())
+export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
+  const [expenseToEdit, handleChange, setExpenseToEdit] = useForm(currentExpense)
   const [memberFilterBy, setMemberFilterBy] = useState('')
   const modalRef = useRef()
 

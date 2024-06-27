@@ -1,4 +1,4 @@
-import { Provider, useSelector } from 'react-redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { store } from './store/store'
