@@ -1,4 +1,5 @@
 import { groupService } from '../../services/group.service.local'
+import { utilService } from '../../services/util.service'
 import {
   ADD_GROUP,
   EDIT_GROUP,
@@ -49,13 +50,24 @@ export async function saveGroup(group) {
   }
 }
 
-export async function removeExpense(group, expenseId) {
+export async function removeExpenseFromGroup(group, expenseId) {
   try {
     const savedGroup = await groupService.removeExpense(group, expenseId)
     store.dispatch({ type: EDIT_GROUP, group: savedGroup })
     return savedGroup
   } catch (err) {
     console.log('GROUP ACTIONS -> Had issues with removing expense:', err)
+    throw err
+  }
+}
+
+export async function addExpenseToGroup(group, expense) {
+  try {
+    const savedGroup = await groupService.saveExpense(group, expense)
+    store.dispatch({ type: EDIT_GROUP, group: savedGroup })
+    return savedGroup
+  } catch (err) {
+    console.log('GROUP ACTIONS -> Had issues with saving expense:', err)
     throw err
   }
 }

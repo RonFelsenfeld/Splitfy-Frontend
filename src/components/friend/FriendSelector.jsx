@@ -3,10 +3,10 @@ import { FriendSelectPreview } from './FriendSelectPreview'
 export function FriendSelector({ friends, expenseToEdit, memberFilterBy, onSelectMember }) {
   const filteredMembers = friends.filter(member => {
     const filterRegex = new RegExp(memberFilterBy, 'i')
-    const { membersInvolvedIds } = expenseToEdit
+    const { involvedMembersIds } = expenseToEdit
 
     // ! Passes only if matches the filter AND not already included
-    return filterRegex.test(member.fullName) && !membersInvolvedIds.includes(member._id)
+    return filterRegex.test(member.fullName) && !involvedMembersIds.includes(member._id)
   })
 
   return (

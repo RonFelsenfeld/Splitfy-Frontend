@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
-import { loadGroup, removeExpense } from '../../store/actions/group.actions'
+import { loadGroup, removeExpenseFromGroup } from '../../store/actions/group.actions'
 
 import { EmptyExpenses } from '../general/EmptyExpenses'
 import { ExpenseList } from '../expense/ExpenseList'
@@ -19,7 +19,7 @@ export function GroupDetails() {
   // todo - show user msg
   async function onRemoveExpense(expenseId) {
     try {
-      await removeExpense(group, expenseId)
+      await removeExpenseFromGroup(group, expenseId)
     } catch (err) {
       console.log('Had issues with removing expense:', err)
     }

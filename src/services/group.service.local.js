@@ -103,8 +103,8 @@ function getDefaultExpense(group) {
     amount: 0,
     at: Date.now(),
     paidBy: null,
-    // membersInvolvedIds: group.members.map(m => m._id), // ! The default behavior is that in new expense everyone is involved
-    membersInvolvedIds: [],
+    // involvedMembersIds: group.members.map(m => m._id), // ! The default behavior is that in new expense everyone is involved
+    involvedMembersIds: [],
     notes: [],
   }
 }
@@ -125,8 +125,8 @@ function getAllFriendsFromGroups(groups) {
   return friends.sort((f1, f2) => f1.fullName.localeCompare(f2.fullName))
 }
 
-function getExpenseDistribution({ amount, membersInvolvedIds }) {
-  const totalPerMember = (amount / (membersInvolvedIds.length + 1)).toFixed(2)
+function getExpenseDistribution({ amount, involvedMembersIds }) {
+  const totalPerMember = (amount / (involvedMembersIds.length + 1)).toFixed(2)
   return utilService.getFormattedCurrency(totalPerMember)
 }
 
@@ -211,7 +211,7 @@ function _generateDemoExpenses({ title, members }) {
 }
 
 function _generateDemoExpense(expense, members) {
-  const newExpense = getEmptyExpense()
+  const newExpense = getDefaultExpense()
 
   newExpense._id = utilService.makeId()
   newExpense.title = expense

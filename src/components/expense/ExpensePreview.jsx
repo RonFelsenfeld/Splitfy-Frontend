@@ -26,7 +26,8 @@ export function ExpensePreview({ expense, onRemoveExpense }) {
 
       <h3 className="expense-title">{title}</h3>
 
-      <p className="paid-desc">{utilService.getShortenName(paidBy.fullName)} paid</p>
+      {paidBy && <p className="paid-desc">{utilService.getShortenName(paidBy.fullName)} paid</p>}
+
       <span className="paid-amount">{utilService.getFormattedCurrency(amount)}</span>
 
       <p className="lent-desc">SOMEONE lent</p>

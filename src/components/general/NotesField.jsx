@@ -4,10 +4,6 @@ import { hideModal } from '../../store/actions/system.actions'
 export function NotesField({ onSubmit }) {
   const [notes, setNotes] = useState('')
 
-  function handleChange({ target }) {
-    setNotes(target.value)
-  }
-
   function onSaveNotes() {
     onSubmit(notes)
     hideModal()
@@ -20,7 +16,7 @@ export function NotesField({ onSubmit }) {
           name="notes"
           id="notes"
           placeholder="Add notes"
-          onChange={handleChange}
+          onChange={({ target }) => setNotes(target.value)}
           value={notes}
         ></textarea>
       </div>

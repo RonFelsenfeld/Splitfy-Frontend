@@ -5,6 +5,8 @@ import { utilService } from '../../services/util.service'
 
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useForm } from '../../customHooks/useForm'
+
+import { addExpenseToGroup } from '../../store/actions/group.actions'
 import { showModal } from '../../store/actions/system.actions'
 
 import { FriendSelector } from '../friend/FriendSelector'
@@ -25,17 +27,17 @@ export function EditExpenseModal({ onCloseModal, group }) {
   function onSelectMember(memberId) {
     setExpenseToEdit(prevExpense => ({
       ...prevExpense,
-      membersInvolvedIds: [...prevExpense.membersInvolvedIds, memberId],
+      involvedMembersIds: [...prevExpense.involvedMembersIds, memberId],
     }))
     setMemberFilterBy('')
   }
 
   function onRemoveMember(memberId) {
-    const { membersInvolvedIds } = expenseToEdit
+    const { involvedMembersIds } = expenseToEdit
 
     setExpenseToEdit(prevExpense => ({
       ...prevExpense,
-      membersInvolvedIds: membersInvolvedIds.filter(id => id !== memberId),
+      involvedMembersIds: involvedMembersIds.filter(id => id !== memberId),
     }))
   }
 
@@ -60,22 +62,21 @@ export function EditExpenseModal({ onCloseModal, group }) {
 
   // todo - show user msg
   async function onSaveExpense() {
-    const { membersInvolvedIds, title, amount } = expenseToEdit
-    if (!membersInvolvedIds.length) return alert('Must have at least one member (expect you)')
-    if (!title) return alert('Must enter title')
-    if (!amount) return alert('Must enter amount')
-    // group.expenses.push(expenseToEdit)
+    const { involvedMembersIds, title, amount } = expenseToEdit
+    if (!involvedMembersIds.length || !title || !amount) {
+      return alert('Must enter all details')
+    }
 
-    // try {
-    //   await saveGroup(group)
-    // } catch (err) {
-    //   console.log('Had issues with saving expense:', err)
-    // } finally {
-    //   onCloseModal()
-    // }
+    try {
+      await addExpenseToGroup(group, expenseToEdit)
+    } catch (err) {
+      console.log('Had issues with saving expense:', err)
+    } finally {
+      onCloseModal()
+    }
   }
 
-  const { title, amount, membersInvolvedIds, at } = expenseToEdit
+  const { title, amount, involvedMembersIds, at } = expenseToEdit
   return (
     <>
       <div className="modal-backdrop"></div>
@@ -92,9 +93,9 @@ export function EditExpenseModal({ onCloseModal, group }) {
           </p>
 
           <div className="input-container flex align-center wrap">
-            {!!membersInvolvedIds.length && (
+            {!!involvedMembersIds.length && (
               <InvolvedFriendList
-                friends={groupService.getMembersFullDetails(group, membersInvolvedIds)}
+                friends={groupService.getMembersFullDetails(group, involvedMembersIds)}
                 onRemoveMember={onRemoveMember}
               />
             )}
