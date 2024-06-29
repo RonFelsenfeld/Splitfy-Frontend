@@ -9,6 +9,7 @@ import { EmptyExpenses } from '../general/EmptyExpenses'
 import { MainLoader } from '../general/MainLoader'
 import { ExpenseList } from '../expense/ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
+import { GeneralHeader } from '../general/GeneralHeader'
 
 export function GroupDetails() {
   const [expenseToEdit, setExpenseToEdit] = useState(null)
@@ -30,26 +31,10 @@ export function GroupDetails() {
 
   if (!group) return
 
-  const { expenses } = group
+  const { expenses, title, imgUrl } = group
   return (
     <section className="group-details">
-      <header className="group-header flex align-center justify-between">
-        <div className="details-container flex align-center">
-          <img
-            src="/assets/img/general/group-default.png"
-            alt="Group profile image"
-            className="group-image"
-          />
-          <h2 className="group-title">{group.title}</h2>
-        </div>
-
-        <button
-          className="btn-add-expense"
-          onClick={() => setExpenseToEdit(groupService.getDefaultExpense())}
-        >
-          Add an expense
-        </button>
-      </header>
+      <GeneralHeader title={title} imgUrl={imgUrl} />
 
       {expenses.length ? (
         <ExpenseList

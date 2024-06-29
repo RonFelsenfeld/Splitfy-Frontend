@@ -161,6 +161,7 @@ function _createDemoGroup(title) {
   group.title = title
   group.members = _generateGroupMembers(title)
   group.expenses = _generateDemoExpenses(group)
+  group.imgUrl = '/assets/img/general/group-default.png'
 
   return group
 }

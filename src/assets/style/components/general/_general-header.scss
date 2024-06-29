@@ -1,0 +1,19 @@
+.general-header {
+  @include pageHeader;
+
+  .details-container {
+    gap: 6px;
+
+    .header-image {
+      @include profilePicture;
+    }
+
+    .header-title {
+      @include overflowTxt;
+
+      font-size: em(24px);
+      line-height: rem(38px);
+      font-family: LatoBold, Arial, Helvetica, sans-serif;
+    }
+  }
+}
