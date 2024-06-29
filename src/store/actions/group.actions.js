@@ -8,14 +8,18 @@ import {
   SET_GROUPS,
 } from '../reducers/group.reducer'
 import { store } from '../store'
+import { setIsLoading } from './system.actions'
 
 export async function loadGroups() {
+  setIsLoading(true)
   try {
     const groups = await groupService.query()
     store.dispatch({ type: SET_GROUPS, groups })
   } catch (err) {
     console.log('GROUP ACTIONS -> Had issues with loading groups:', err)
     throw err
+  } finally {
+    setIsLoading(false)
   }
 }
 

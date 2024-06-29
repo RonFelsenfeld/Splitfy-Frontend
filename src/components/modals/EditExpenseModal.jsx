@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { groupService } from '../../services/group.service.local'
 import { utilService } from '../../services/util.service'
@@ -15,9 +15,22 @@ import { DynamicModal } from './DynamicModal'
 export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
   const [expenseToEdit, handleChange, setExpenseToEdit] = useForm(currentExpense)
   const [memberFilterBy, setMemberFilterBy] = useState('')
+  const backdropRef = useRef()
   const modalRef = useRef()
 
-  useClickOutside(modalRef, onCloseModal)
+  useClickOutside(modalRef, closeModal)
+
+  function closeModal() {
+    utilService.animateCSS(modalRef.current, 'fadeOut')
+
+    setTimeout(() => {
+      utilService.animateCSS(backdropRef.current, 'fadeOut')
+    }, 300)
+
+    setTimeout(() => {
+      onCloseModal()
+    }, 600)
+  }
 
   function onSetMemberFilterBy({ target }) {
     setMemberFilterBy(target.value)
@@ -71,19 +84,19 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
     } catch (err) {
       console.log('Had issues with saving expense:', err)
     } finally {
-      onCloseModal()
+      closeModal()
     }
   }
 
   const { title, amount, involvedMembersIds, at } = expenseToEdit
   return (
     <>
-      <div className="modal-backdrop"></div>
+      <div ref={backdropRef} className="modal-backdrop"></div>
 
-      <section className="edit-expense-modal" ref={modalRef}>
+      <section className="edit-expense-modal animate__animated animate__fadeIn" ref={modalRef}>
         <header className="modal-header flex align-center justify-between">
           <h1 className="modal-title">Add an expense</h1>
-          <button className="btn-close-modal" onClick={onCloseModal}></button>
+          <button className="btn-close-modal" onClick={closeModal}></button>
         </header>
 
         <div className="with-field flex">
@@ -175,7 +188,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
         </div>
 
         <footer className="modal-footer flex">
-          <button className="btn btn-cancel" onClick={onCloseModal}>
+          <button className="btn btn-cancel" onClick={closeModal}>
             Cancel
           </button>
           <button className="btn btn-save" onClick={onSaveExpense}>

@@ -3,6 +3,7 @@
 @import 'setup/vars';
 @import 'setup/mixins';
 @import 'setup/functions';
+@import 'setup/animations';
 
 // BASICS
 @import 'basics/base';
@@ -19,6 +20,7 @@
 @import 'components/general/empty-expenses';
 @import 'components/general/date-picker-field';
 @import 'components/general/notes-field';
+@import 'components/general/main-loader';
 
 // * Sidebar
 @import 'components/sidebar/sidebar';

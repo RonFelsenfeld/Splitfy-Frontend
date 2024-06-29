@@ -11,6 +11,7 @@ export const utilService = {
   getFormattedTimeStr,
   getFormattedCurrency,
   getFormattedRegex,
+  animateCSS,
 }
 
 function makeId(length = 6) {
@@ -87,4 +88,20 @@ function getFormattedCurrency(amount) {
 
 function getFormattedRegex(str) {
   return str.replace(/[.*+?^${}(|[\]\\]/g, '\\$&')
+}
+
+function animateCSS(el, animation = 'bounce') {
+  const prefix = 'animate__'
+
+  return new Promise(resolve => {
+    const animationName = `${prefix}${animation}`
+    el.classList.add(`${prefix}animated`, animationName)
+
+    el.addEventListener('animationend', handleAnimationEnd, { once: true })
+
+    function handleAnimationEnd(event) {
+      event.stopPropagation()
+      resolve('Animation ended')
+    }
+  })
 }

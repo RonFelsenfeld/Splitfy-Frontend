@@ -215,11 +215,11 @@ function _generateDemoExpenses({ title, members }) {
   return fullExpenses
 }
 
-function _generateDemoExpense(expense, members) {
+function _generateDemoExpense(title, members) {
   const newExpense = getDefaultExpense()
 
   newExpense._id = utilService.makeId()
-  newExpense.title = expense
+  newExpense.title = title
   newExpense.amount = utilService.getRandomIntInclusive(10, 250)
 
   // ! Generating random paying member
