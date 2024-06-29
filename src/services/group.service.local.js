@@ -16,6 +16,8 @@ export const groupService = {
   getDefaultExpense,
   getMembersFullDetails,
   getAllFriendsFromGroups,
+  getFriendById,
+  getFriendGroup,
   getExpenseDistribution,
 }
 
@@ -102,14 +104,14 @@ function getDefaultGroup() {
   }
 }
 
-function getDefaultExpense(group) {
+// ! When on friend details and adding new expense, adding automatically to involvedMembers
+function getDefaultExpense(friendId = null) {
   return {
     title: '',
     amount: 0,
     at: Date.now(),
     paidBy: null,
-    // involvedMembersIds: group.members.map(m => m._id), // ! The default behavior is that in new expense everyone is involved
-    involvedMembersIds: [],
+    involvedMembersIds: friendId ? [friendId] : [],
     notes: [],
   }
 }
@@ -128,6 +130,31 @@ function getAllFriendsFromGroups(groups) {
   }, [])
 
   return friends.sort((f1, f2) => f1.fullName.localeCompare(f2.fullName))
+}
+
+async function getFriendById(friendId) {
+  try {
+    const groups = await query()
+    const allFriends = getAllFriendsFromGroups(groups)
+    const friend = allFriends.find(f => f._id === friendId)
+    if (!friend) throw new Error(`Could not find friend with id:${friendId}`)
+    return friend
+  } catch (err) {
+    console.log('Had issues with loading friend:', err)
+    throw err
+  }
+}
+
+async function getFriendGroup(friendId) {
+  try {
+    const groups = await query()
+    const group = groups.find(g => g.members.some(m => m._id === friendId))
+    if (!group) throw new Error(`Could not find group with member:${friendId}`)
+    return group
+  } catch (err) {
+    console.log("Had issues with getting friend's group:", err)
+    throw err
+  }
 }
 
 function getExpenseDistribution({ amount, involvedMembersIds }) {
@@ -251,26 +278,74 @@ function _generateGroupMembers(group) {
   switch (group) {
     case 'Familia':
       return [
-        { _id: utilService.makeId(), fullName: 'Avi Cohen', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Mor Cohen', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Daniel Cohen', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Yotam Cohen', imgUrl: null },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Avi Cohen',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Mor Cohen',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Daniel Cohen',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Yotam Cohen',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
       ]
 
     case 'The Squad':
       return [
-        { _id: utilService.makeId(), fullName: 'Bar Levi', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Moshe Shaked', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Ori Lahav', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Ron Aran', imgUrl: null },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Bar Levi',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Moshe Shaked',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Ori Lahav',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Ron Aran',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
       ]
 
     case 'Microsoft Fullstack Office':
       return [
-        { _id: utilService.makeId(), fullName: 'Limor Bar', imgUrl: null },
-        { i_idd: utilService.makeId(), fullName: 'Assaf Hollander', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Michael Yerushalmi', imgUrl: null },
-        { _id: utilService.makeId(), fullName: 'Shilat Brudo', imgUrl: null },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Limor Bar',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Assaf Hollander',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Michael Yerushalmi',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
+        {
+          _id: utilService.makeId(),
+          fullName: 'Shilat Brudo',
+          imgUrl: '/assets/img/general/user-default.png',
+        },
       ]
 
     default:

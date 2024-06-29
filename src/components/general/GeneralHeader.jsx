@@ -1,4 +1,4 @@
-export function GeneralHeader({ title, imgUrl }) {
+export function GeneralHeader({ title, imgUrl, setExpenseToEdit }) {
   return (
     <header className="general-header flex align-center justify-between">
       <div className="details-container flex align-center">
@@ -7,10 +7,7 @@ export function GeneralHeader({ title, imgUrl }) {
         <h2 className="header-title">{title}</h2>
       </div>
 
-      <button
-        className="btn-add-expense"
-        onClick={() => setExpenseToEdit(groupService.getDefaultExpense())}
-      >
+      <button className="btn-add-expense" onClick={setExpenseToEdit}>
         Add an expense
       </button>
     </header>

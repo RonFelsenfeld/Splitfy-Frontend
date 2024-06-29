@@ -119,12 +119,6 @@
   border-radius: 50%;
 }
 
-@mixin pageHeader {
-  padding: em(13px) em(10px) em(10px);
-  border-block-end: 1px solid $group-header-border-clr;
-  background-color: $expense-border-clr;
-}
-
 @mixin btnX($color: $btn-remove-clr) {
   font-family: FaSolid;
   content: '\58';
@@ -189,4 +183,9 @@
   color: $color;
   background-color: $bgc;
   box-shadow: $btn-action-shadow;
+}
+
+@mixin detailsContainer {
+  border-inline: 1px solid $main-column-border-clr;
+  box-shadow: $main-column-shadow;
 }

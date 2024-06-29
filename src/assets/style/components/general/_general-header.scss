@@ -1,5 +1,7 @@
 .general-header {
-  @include pageHeader;
+  padding: em(13px) em(10px) em(10px);
+  border-block-end: 1px solid $group-header-border-clr;
+  background-color: $expense-border-clr;
 
   .details-container {
     gap: 6px;
@@ -14,6 +16,18 @@
       font-size: em(24px);
       line-height: rem(38px);
       font-family: LatoBold, Arial, Helvetica, sans-serif;
+    }
+  }
+
+  .btn-add-expense {
+    @include btnAction($secondary-theme-clr);
+
+    border-color: $btn-submit-expense-border-clr;
+    text-shadow: 0 -1px 0 $secondary-theme-clr-20;
+    background-color: $secondary-theme-clr;
+
+    &:hover {
+      background-color: $secondary-theme-clr-10;
     }
   }
 }

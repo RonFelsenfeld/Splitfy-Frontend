@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 
-import { groupService } from '../../services/group.service.local'
 import { loadGroup, removeExpenseFromGroup } from '../../store/actions/group.actions'
+import { groupService } from '../../services/group.service.local'
 
 import { EmptyExpenses } from '../general/EmptyExpenses'
-import { MainLoader } from '../general/MainLoader'
+import { GeneralHeader } from '../general/GeneralHeader'
 import { ExpenseList } from '../expense/ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
-import { GeneralHeader } from '../general/GeneralHeader'
 
 export function GroupDetails() {
   const [expenseToEdit, setExpenseToEdit] = useState(null)
@@ -29,12 +28,17 @@ export function GroupDetails() {
     }
   }
 
+  // todo add loader
   if (!group) return
 
   const { expenses, title, imgUrl } = group
   return (
     <section className="group-details">
-      <GeneralHeader title={title} imgUrl={imgUrl} />
+      <GeneralHeader
+        title={title}
+        imgUrl={imgUrl}
+        setExpenseToEdit={() => setExpenseToEdit(groupService.getDefaultExpense())}
+      />
 
       {expenses.length ? (
         <ExpenseList
