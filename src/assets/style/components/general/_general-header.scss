@@ -12,6 +12,7 @@
 
     .header-title {
       @include overflowTxt;
+      padding-inline-start: 5px;
 
       font-size: em(24px);
       line-height: rem(38px);

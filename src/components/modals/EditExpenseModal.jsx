@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { groupService } from '../../services/group.service.local'
 import { utilService } from '../../services/util.service'

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 
-import { loadGroup, removeExpenseFromGroup } from '../../store/actions/group.actions'
 import { groupService } from '../../services/group.service.local'
+import { loadGroup, removeExpenseFromGroup } from '../../store/actions/group.actions'
 
 import { EmptyExpenses } from '../general/EmptyExpenses'
 import { GeneralHeader } from '../general/GeneralHeader'
@@ -37,7 +37,8 @@ export function GroupDetails() {
       <GeneralHeader
         title={title}
         imgUrl={imgUrl}
-        setExpenseToEdit={() => setExpenseToEdit(groupService.getDefaultExpense())}
+        editedExpense={groupService.getDefaultExpense()}
+        group={group}
       />
 
       {expenses.length ? (

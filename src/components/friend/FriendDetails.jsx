@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react'
 
 import { groupService } from '../../services/group.service.local'
 import { GeneralHeader } from '../general/GeneralHeader'
-import { EditExpenseModal } from '../modals/EditExpenseModal'
 
 export function FriendDetails() {
-  const [expenseToEdit, setExpenseToEdit] = useState(null)
   const [friend, setFriend] = useState(null)
   const [group, setGroup] = useState(null)
   const { friendId } = useParams()
@@ -34,16 +32,9 @@ export function FriendDetails() {
       <GeneralHeader
         title={fullName}
         imgUrl={imgUrl}
-        setExpenseToEdit={() => setExpenseToEdit(groupService.getDefaultExpense(friendId))}
+        editedExpense={groupService.getDefaultExpense(friendId)}
+        group={group}
       />
-
-      {expenseToEdit && (
-        <EditExpenseModal
-          onCloseModal={() => setExpenseToEdit(null)}
-          group={group}
-          currentExpense={expenseToEdit}
-        />
-      )}
     </section>
   )
 }

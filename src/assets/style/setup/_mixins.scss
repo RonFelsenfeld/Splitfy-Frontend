@@ -185,7 +185,7 @@
   box-shadow: $btn-action-shadow;
 }
 
-@mixin detailsContainer {
+@mixin mainColumnContainer {
   border-inline: 1px solid $main-column-border-clr;
   box-shadow: $main-column-shadow;
 }

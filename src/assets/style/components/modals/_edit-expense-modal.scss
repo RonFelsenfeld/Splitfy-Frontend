@@ -4,9 +4,9 @@
 
   width: 100vw;
   height: 100dvh;
+  z-index: 1;
 
   background-color: $group-header-bg-clr;
-
   animation: backdropFadeIn 0.4s forwards;
 }
 
