@@ -1,11 +1,11 @@
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { hideModal } from '../../store/actions/system.actions'
+import { hideDynamicModal } from '../../store/actions/system.actions'
 
 export function DatePickerField({ currentDate, onSubmit }) {
   function onDatePick(date) {
     onSubmit(date.getTime())
-    hideModal()
+    hideDynamicModal()
   }
 
   return (

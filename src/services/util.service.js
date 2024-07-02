@@ -91,6 +91,8 @@ function getFormattedRegex(str) {
 }
 
 function animateCSS(el, animation = 'bounce') {
+  if (!el) return
+
   const prefix = 'animate__'
 
   return new Promise(resolve => {

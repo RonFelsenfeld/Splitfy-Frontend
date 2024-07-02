@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { groupService } from '../../services/group.service.local'
 import { utilService } from '../../services/util.service'
@@ -6,19 +7,26 @@ import { utilService } from '../../services/util.service'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useForm } from '../../customHooks/useForm'
 import { addExpenseToGroup } from '../../store/actions/group.actions'
-import { showModal } from '../../store/actions/system.actions'
+import { hideDynamicModal, showDynamicModal } from '../../store/actions/system.actions'
 
 import { FriendSelector } from '../friend/FriendSelector'
 import { InvolvedFriendList } from '../friend/InvolvedFriendList'
-import { DynamicModal } from './DynamicModal'
 
 export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
+  const modal = useSelector(store => store.systemModule.modal)
   const [expenseToEdit, handleChange, setExpenseToEdit] = useForm(currentExpense)
   const [memberFilterBy, setMemberFilterBy] = useState('')
   const backdropRef = useRef()
   const modalRef = useRef()
 
-  useClickOutside(modalRef, closeModal)
+  useClickOutside(modalRef, () => {
+    console.log(modal.isOpen)
+    if (!modal.isOpen) {
+      closeModal()
+      return
+    }
+    hideDynamicModal()
+  })
 
   function closeModal() {
     utilService.animateCSS(modalRef.current, 'fadeOut')
@@ -60,7 +68,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
       currentDate: expenseToEdit.at,
       onSubmit: date => setExpenseToEdit(prevExpense => ({ ...prevExpense, at: date })),
     }
-    showModal(cmpOptions)
+    showDynamicModal(cmpOptions)
   }
 
   function onNotesFieldClick() {
@@ -69,7 +77,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
       title: 'Add notes',
       onSubmit: notes => setExpenseToEdit(prevExpense => ({ ...prevExpense, notes })),
     }
-    showModal(cmpOptions)
+    showDynamicModal(cmpOptions)
   }
 
   // todo - show user msg
@@ -89,11 +97,18 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
   }
 
   const { title, amount, involvedMembersIds, at } = expenseToEdit
+  const { isOpen } = modal
+
   return (
     <>
       <div ref={backdropRef} className="modal-backdrop"></div>
 
-      <section className="edit-expense-modal animate__animated animate__fadeIn" ref={modalRef}>
+      <section
+        className={`edit-expense-modal animate__animated animate__fadeIn ${
+          isOpen ? 'dynamic-modal-open' : ''
+        }`}
+        ref={modalRef}
+      >
         <header className="modal-header flex align-center justify-between">
           <h1 className="modal-title">Add an expense</h1>
           <button className="btn-close-modal" onClick={closeModal}></button>
@@ -195,8 +210,6 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
             Save
           </button>
         </footer>
-
-        <DynamicModal />
       </section>
     </>
   )

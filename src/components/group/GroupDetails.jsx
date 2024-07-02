@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 
 import { groupService } from '../../services/group.service.local'
@@ -11,12 +11,20 @@ import { ExpenseList } from '../expense/ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
 
 export function GroupDetails() {
-  const [expenseToEdit, setExpenseToEdit] = useState(null)
   const group = useSelector(store => store.groupModule.currentGroup)
-  const { groupId } = useParams()
+  const [expenseToEdit, setExpenseToEdit] = useState(null)
+  const { groupId, isAdding } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadGroup(groupId)
+
+    // ! If click on add expense from another route --> automatically setExpenseToEdit
+
+    if (isAdding) {
+      setExpenseToEdit(groupService.getDefaultExpense())
+      navigate(`/groups/${group._id}`)
+    }
   }, [groupId])
 
   // todo - show user msg
@@ -38,7 +46,7 @@ export function GroupDetails() {
         title={title}
         imgUrl={imgUrl}
         editedExpense={groupService.getDefaultExpense()}
-        group={group}
+        currentGroup={group}
       />
 
       {expenses.length ? (

@@ -2,12 +2,25 @@
   @include modal;
 
   position: absolute;
-  top: 0;
-  left: calc(100% + 15px);
+  top: 50%;
+  left: 50%;
+  min-width: 230px;
 
-  margin: 0;
   padding: 0;
+  margin: 0;
+
+  transform: translate(0, -50%);
+  transition: opacity 0.4s;
   z-index: 10;
+
+  &.center {
+    inset: 50% 50% auto auto;
+    transform: translate(50%, -50%);
+  }
+
+  &.slide-right {
+    transform: translate(23%, -58%);
+  }
 
   .dynamic-modal-content {
     white-space: nowrap;

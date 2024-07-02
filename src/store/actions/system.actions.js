@@ -5,13 +5,13 @@ export function setIsLoading(isLoading) {
   store.dispatch({ type: SET_IS_LOADING, isLoading })
 }
 
-export function showModal(cmp) {
+export function showDynamicModal(cmp, isCentered = false) {
   store.dispatch({
     type: SHOW_MODAL,
-    modal: { isOpen: true, cmp },
+    modal: { isOpen: true, cmp, isCentered },
   })
 }
 
-export function hideModal() {
+export function hideDynamicModal() {
   store.dispatch({ type: HIDE_MODAL })
 }

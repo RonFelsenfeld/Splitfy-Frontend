@@ -1,8 +1,36 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
+
+import { hideDynamicModal, showDynamicModal } from '../../store/actions/system.actions'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
 
-export function GeneralHeader({ title, imgUrl, editedExpense, group }) {
+export function GeneralHeader({ title, imgUrl, editedExpense, currentGroup }) {
   const [expenseToEdit, setExpenseToEdit] = useState(null)
+  const [group, setGroup] = useState(currentGroup)
+  const navigate = useNavigate()
+
+  // ! When on dashboard/all expenses sections - there is no group
+  function handleAddExpenseClick() {
+    if (group) {
+      setExpenseToEdit(editedExpense)
+    } else {
+      handleAddExpenseWithoutGroup()
+    }
+  }
+
+  // ! Showing group selector modal and navigating to it's route when user picked
+  function handleAddExpenseWithoutGroup() {
+    const cmpOptions = {
+      type: 'groupSelector',
+      title: 'Choose group',
+      onSubmit: group => {
+        setGroup(group)
+        hideDynamicModal()
+        navigate(`/groups/${group._id}/add`)
+      },
+    }
+    showDynamicModal(cmpOptions, true)
+  }
 
   return (
     <>
@@ -13,7 +41,7 @@ export function GeneralHeader({ title, imgUrl, editedExpense, group }) {
           <h2 className="header-title">{title}</h2>
         </div>
 
-        <button className="btn-add-expense" onClick={() => setExpenseToEdit(editedExpense)}>
+        <button className="btn-add-expense" onClick={handleAddExpenseClick}>
           Add an expense
         </button>
       </header>

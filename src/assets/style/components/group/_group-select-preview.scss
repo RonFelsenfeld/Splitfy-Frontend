@@ -1,0 +1,16 @@
+.group-select {
+  gap: 6px;
+  padding: 10px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $group-header-bg-clr;
+  }
+
+  .group-name {
+    font-size: em(14px);
+    font-family: $main-font-family;
+    font-weight: normal;
+  }
+}

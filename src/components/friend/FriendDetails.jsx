@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { groupService } from '../../services/group.service.local'
 import { GeneralHeader } from '../general/GeneralHeader'
+import { MainLoader } from '../general/MainLoader'
 
 export function FriendDetails() {
   const [friend, setFriend] = useState(null)
@@ -24,7 +25,7 @@ export function FriendDetails() {
     }
   }
 
-  if (!friend || !group) return
+  if (!friend || !group) return <MainLoader />
 
   const { fullName, imgUrl } = friend
   return (
@@ -33,7 +34,7 @@ export function FriendDetails() {
         title={fullName}
         imgUrl={imgUrl}
         editedExpense={groupService.getDefaultExpense(friendId)}
-        group={group}
+        currentGroup={group}
       />
     </section>
   )
