@@ -6,6 +6,7 @@ import { WorkspaceIndex } from './pages/WorkspaceIndex'
 
 import { AppHeader } from './components/general/AppHeader'
 import { Dashboard } from './components/dashboard/Dashboard'
+import { ActivityLog } from './components/activity/ActivityLog'
 import { GroupDetails } from './components/group/GroupDetails'
 import { FriendDetails } from './components/friend/FriendDetails'
 import { DynamicModal } from './components/modals/DynamicModal'
@@ -21,6 +22,7 @@ export function App() {
             <Routes>
               <Route element={<WorkspaceIndex />} path="/">
                 <Route element={<Dashboard />} path="/dashboard" />
+                <Route element={<ActivityLog />} path="/activity" />
                 <Route element={<GroupDetails />} path="/groups/:groupId/:isAdding?" />
                 <Route element={<FriendDetails />} path="/friends/:friendId" />
               </Route>

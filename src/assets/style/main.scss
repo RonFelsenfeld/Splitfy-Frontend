@@ -22,11 +22,15 @@
 @import 'components/general/date-picker-field';
 @import 'components/general/notes-field';
 @import 'components/general/main-loader';
+@import 'components/general/anyday-invitation';
 
 // * Dashboard
 @import 'components/dashboard/dashboard';
 @import 'components/dashboard/dashboard-own-list';
 @import 'components/dashboard/dashboard-own-preview';
+
+// * Activity
+@import 'components/activity/activity-log';
 
 // * Sidebar
 @import 'components/sidebar/sidebar';
