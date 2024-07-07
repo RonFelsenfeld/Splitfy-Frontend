@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 
 import { loadGroups } from '../store/actions/group.actions'
 import { Sidebar } from '../components/sidebar/Sidebar'
 import { MainLoader } from '../components/general/MainLoader'
+import { DynamicInformation } from '../components/general/DynamicInformation'
 
 export function WorkspaceIndex() {
   const isLoading = useSelector(store => store.systemModule.isLoading)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     loadGroups()
@@ -21,6 +23,7 @@ export function WorkspaceIndex() {
         <div className="main-content animate__animated animate__fadeIn">
           <Sidebar />
           <Outlet />
+          <DynamicInformation pathname={pathname} />
         </div>
       )}
     </section>
