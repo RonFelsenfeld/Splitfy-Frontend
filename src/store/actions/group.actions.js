@@ -1,5 +1,4 @@
 import { groupService } from '../../services/group.service.local'
-import { utilService } from '../../services/util.service'
 import {
   ADD_GROUP,
   EDIT_GROUP,

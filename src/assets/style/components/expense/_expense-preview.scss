@@ -13,6 +13,31 @@
   padding: em(10px) em(5px);
   border-block-end: 1px solid $expense-border-clr;
 
+  &.with-group {
+    grid-template-areas:
+      'date icon title paid-desc lent-desc'
+      'date icon group paid-amount lent-amount';
+
+    .btn-group {
+      grid-area: group;
+      justify-self: start;
+
+      padding-inline: 3px;
+      border: 1px solid $hovered-list-header-border-bottom-clr;
+      border-radius: 3px;
+      margin-inline-start: 14px;
+      margin-block-start: 1px;
+
+      font-size: em(10px);
+      color: $hovered-font-clr;
+      background-color: $group-header-bg-clr;
+
+      &:hover {
+        background-color: $hovered-list-header-border-bottom-clr;
+      }
+    }
+  }
+
   &:hover {
     background-color: $hovered-expense-bg-clr;
     cursor: pointer;

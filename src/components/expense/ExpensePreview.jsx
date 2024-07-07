@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { utilService } from '../../services/util.service'
 import { ExpenseDetails } from './ExpenseDetails'
+import { NavLink } from 'react-router-dom'
 
 export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
   const [isDetailsShown, setIsDetailsShown] = useState(false)
@@ -22,10 +23,10 @@ export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
     return utilService.getFormattedCurrency(totalPerMember)
   }
 
-  const { title, at, paidBy, amount } = expense
+  const { title, at, paidBy, amount, group } = expense
   return (
     <>
-      <article className="expense-preview" onClick={onToggleDetails}>
+      <article className={`expense-preview ${group ? 'with-group' : ''}`} onClick={onToggleDetails}>
         <div className="expense-date flex column align-center">
           <span className="month">{utilService.getMonthFromTimestamp(at)}</span>
           <span className="date">{utilService.getDateFromTimestamp(at)}</span>
@@ -38,6 +39,11 @@ export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
         />
 
         <h3 className="expense-title">{title}</h3>
+        {group && (
+          <NavLink to={`/groups/${group._id}`}>
+            <button className="btn-group">{group.title}</button>
+          </NavLink>
+        )}
 
         {paidBy && <p className="paid-desc">{utilService.getShortenName(paidBy.fullName)} paid</p>}
 
@@ -48,9 +54,10 @@ export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
 
         <button
           className="btn-remove-expense"
-          onClick={() => onRemoveExpense(expense._id)}
+          onClick={ev => onRemoveExpense(ev, expense)}
         ></button>
       </article>
+
       <ExpenseDetails
         expense={expense}
         isDetailsShown={isDetailsShown}

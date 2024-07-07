@@ -12,6 +12,7 @@ export const groupService = {
   getExpenseById,
   removeExpense,
   saveExpense,
+  getAllExpensesFromGroups,
   getDefaultGroup,
   getDefaultExpense,
   getMembersFullDetails,
@@ -90,6 +91,21 @@ function _updateExpense(group, expense) {
   expense.lastUpdated = Date.now()
   group.expenses.splice(expenseIdx, 1, expense)
   return save(group)
+}
+
+function getAllExpensesFromGroups(groups) {
+  return groups.reduce((expenses, group) => {
+    const groupExpenses = [...group.expenses]
+
+    // ! Creating expenses array with mini-version of it's group
+    const expensesWithGroups = groupExpenses.map(expense => {
+      const { _id, title } = group
+      return { ...expense, group: { _id, title } }
+    })
+
+    expenses.push(...expensesWithGroups)
+    return expenses
+  }, [])
 }
 
 ////////////////////////////////////////////////////
