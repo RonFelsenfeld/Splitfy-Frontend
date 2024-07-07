@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router'
 import { hideDynamicModal, showDynamicModal } from '../../store/actions/system.actions'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
 
-export function GeneralHeader({ title, imgUrl, editedExpense, currentGroup }) {
+export function GeneralHeader({
+  title,
+  imgUrl,
+  editedExpense,
+  currentGroup,
+  showAddExpenseBtn = true,
+}) {
   const [expenseToEdit, setExpenseToEdit] = useState(null)
   const [group, setGroup] = useState(currentGroup)
   const navigate = useNavigate()
@@ -41,9 +47,11 @@ export function GeneralHeader({ title, imgUrl, editedExpense, currentGroup }) {
           <h2 className="header-title">{title}</h2>
         </div>
 
-        <button className="btn-add-expense" onClick={handleAddExpenseClick}>
-          Add an expense
-        </button>
+        {showAddExpenseBtn && (
+          <button className="btn-add-expense" onClick={handleAddExpenseClick}>
+            Add an expense
+          </button>
+        )}
       </header>
 
       {expenseToEdit && (

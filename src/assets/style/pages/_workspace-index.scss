@@ -9,4 +9,9 @@
     grid-template-columns: 200px 1fr 200px;
     min-height: calc(100dvh - $app-header-height);
   }
+
+  .right-col {
+    margin-block-start: em(10px);
+    padding-inline-start: em(20px);
+  }
 }

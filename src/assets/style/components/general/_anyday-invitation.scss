@@ -1,0 +1,47 @@
+.anyday-invitation {
+  .title {
+    @include capitalizedTitle(em(13px), rem(24px));
+  }
+
+  .anyday-link {
+    &:hover {
+      .anyday-img {
+        background-color: $hovered-list-header-border-bottom-clr;
+        scale: 1.03;
+      }
+    }
+
+    .anyday-img {
+      width: em(114px);
+      height: em(114px);
+
+      padding: 5px;
+      border-radius: 20px;
+      margin-block: 8px;
+
+      object-fit: contain;
+      background-color: $group-header-bg-clr;
+      box-shadow: $anyday-shadow;
+      transition: all 0.4s;
+    }
+  }
+
+  .description {
+    font-size: em(13px);
+    line-height: rem(18px);
+
+    span {
+      font-family: LatoBold;
+    }
+  }
+
+  .btn-cta {
+    @include btnAction($secondary-theme-clr);
+    margin-block-start: 8px;
+    text-shadow: 0 -1px 0 $secondary-theme-clr-20;
+
+    &:hover {
+      background-color: $secondary-theme-clr-10;
+    }
+  }
+}

@@ -55,11 +55,7 @@
       }
 
       .title {
-        text-transform: uppercase;
-        color: $secondary-font-clr;
-        font-size: em(14px);
-        line-height: rem(36px);
-        font-family: LatoBold;
+        @include capitalizedTitle(em(14px), rem(36px));
       }
 
       .not-owe-msg {

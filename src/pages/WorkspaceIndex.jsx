@@ -23,7 +23,10 @@ export function WorkspaceIndex() {
         <div className="main-content animate__animated animate__fadeIn">
           <Sidebar />
           <Outlet />
-          <DynamicInformation pathname={pathname} />
+
+          <div className="right-col">
+            <DynamicInformation pathname={pathname} />
+          </div>
         </div>
       )}
     </section>
