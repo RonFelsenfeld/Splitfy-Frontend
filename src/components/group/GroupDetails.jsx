@@ -23,7 +23,7 @@ export function GroupDetails() {
 
     if (isAdding) {
       setExpenseToEdit(groupService.getDefaultExpense())
-      navigate(`/groups/${group._id}`)
+      navigate(`/groups/${groupId}`)
     }
   }, [groupId])
 

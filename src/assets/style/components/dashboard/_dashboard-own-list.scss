@@ -1,0 +1,28 @@
+.main-details {
+  .container {
+    .dashboard-own-list {
+      .dashboard-own-preview {
+        .details-container {
+          .member-owe-amount {
+            color: $main-theme-clr;
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      .dashboard-own-list {
+        padding-inline-start: em(15px);
+        border-inline-start: 1px solid $group-header-bg-clr;
+
+        .dashboard-own-preview {
+          .details-container {
+            .member-owe-amount {
+              color: $secondary-theme-clr;
+            }
+          }
+        }
+      }
+    }
+  }
+}

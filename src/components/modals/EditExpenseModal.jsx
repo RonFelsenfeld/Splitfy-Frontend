@@ -19,14 +19,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
   const backdropRef = useRef()
   const modalRef = useRef()
 
-  useClickOutside(modalRef, () => {
-    console.log(modal.isOpen)
-    if (!modal.isOpen) {
-      closeModal()
-      return
-    }
-    hideDynamicModal()
-  })
+  useClickOutside(modalRef, closeModal)
 
   function closeModal() {
     utilService.animateCSS(modalRef.current, 'fadeOut')

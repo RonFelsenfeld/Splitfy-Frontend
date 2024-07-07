@@ -5,7 +5,7 @@ import { store } from './store/store'
 import { WorkspaceIndex } from './pages/WorkspaceIndex'
 
 import { AppHeader } from './components/general/AppHeader'
-import { Dashboard } from './components/general/Dashboard'
+import { Dashboard } from './components/dashboard/Dashboard'
 import { GroupDetails } from './components/group/GroupDetails'
 import { FriendDetails } from './components/friend/FriendDetails'
 import { DynamicModal } from './components/modals/DynamicModal'

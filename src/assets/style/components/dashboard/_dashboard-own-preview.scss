@@ -1,0 +1,24 @@
+.dashboard-own-preview {
+  gap: 10px;
+  padding: em(7px) em(13px) em(7px) 0;
+
+  .member-image {
+    @include profilePicture(em(30px), em(30px));
+  }
+
+  .details-container {
+    .member-name {
+      font-size: em(16px);
+      font-weight: normal;
+      color: rgb(0, 0, 0);
+    }
+
+    .member-owe-amount {
+      font-size: em(13px);
+
+      span {
+        font-family: LatoBold;
+      }
+    }
+  }
+}

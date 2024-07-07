@@ -1,0 +1,71 @@
+.dashboard {
+  @include mainColumnContainer;
+
+  .balance-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+
+    padding-block: 7px;
+    border-block-end: 1px solid $group-header-border-clr;
+
+    background-color: $expense-border-clr;
+
+    > * {
+      width: 100%;
+
+      &.owe-container {
+        border-inline: 1px solid $group-header-border-clr;
+      }
+
+      p {
+        font-size: em(13px);
+        line-height: rem(16px);
+        text-align: center;
+        color: $secondary-font-clr;
+
+        &.owe {
+          color: $secondary-theme-clr;
+        }
+
+        &.owed {
+          color: $main-theme-clr;
+        }
+      }
+    }
+  }
+
+  .main-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-inline: 15px;
+
+    .container {
+      width: 100%;
+
+      &:last-of-type {
+        justify-self: end;
+
+        .title,
+        .not-owe-msg {
+          &:last-of-type {
+            text-align: right;
+          }
+        }
+      }
+
+      .title {
+        text-transform: uppercase;
+        color: $secondary-font-clr;
+        font-size: em(14px);
+        line-height: rem(36px);
+        font-family: LatoBold;
+      }
+
+      .not-owe-msg {
+        color: $secondary-font-clr;
+        font-size: em(16px);
+      }
+    }
+  }
+}
