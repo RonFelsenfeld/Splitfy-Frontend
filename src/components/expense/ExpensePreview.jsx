@@ -6,7 +6,9 @@ import { NavLink } from 'react-router-dom'
 export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
   const [isDetailsShown, setIsDetailsShown] = useState(false)
 
-  function onToggleDetails() {
+  function onToggleDetails({ target }) {
+    // ! If clicked on the remove button -> don't show details
+    if (target.type === 'submit') return
     setIsDetailsShown(prevIsShown => !prevIsShown)
   }
 
@@ -52,10 +54,7 @@ export function ExpensePreview({ expense, onRemoveExpense, setExpenseToEdit }) {
         <p className="lent-desc">SOMEONE lent</p>
         <span className="lent-amount">{getFormattedDebtDistribution()}</span>
 
-        <button
-          className="btn-remove-expense"
-          onClick={ev => onRemoveExpense(ev, expense)}
-        ></button>
+        <button className="btn-remove-expense" onClick={() => onRemoveExpense(expense)}></button>
       </article>
 
       <ExpenseDetails

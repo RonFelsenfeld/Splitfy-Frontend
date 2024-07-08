@@ -33,8 +33,7 @@ export function GroupDetails() {
   }, [groupId])
 
   // todo - show user msg
-  async function onRemoveExpense(ev, { _id }) {
-    ev.preventDefault()
+  async function onRemoveExpense({ _id }) {
     try {
       await removeExpenseFromGroup(group, _id)
     } catch (err) {
