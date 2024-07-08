@@ -50,9 +50,16 @@
     }
   }
 
+  &:hover {
+    background-color: $group-header-bg-clr;
+
+    article {
+      background-color: $group-header-bg-clr;
+    }
+  }
+
   &:not(.active):hover {
     color: $color;
-    background-color: $group-header-bg-clr;
 
     article {
       background-color: $group-header-bg-clr;

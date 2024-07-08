@@ -12,6 +12,7 @@ export const utilService = {
   getFormattedCurrency,
   getFormattedRegex,
   animateCSS,
+  toggleClass,
 }
 
 function makeId(length = 6) {
@@ -106,4 +107,8 @@ function animateCSS(el, animation = 'bounce') {
       resolve('Animation ended')
     }
   })
+}
+
+function toggleClass(el, className) {
+  el.classList.toggle(className)
 }

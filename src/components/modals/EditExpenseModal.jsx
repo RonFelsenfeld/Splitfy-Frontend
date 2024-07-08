@@ -25,14 +25,12 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
 
   function closeModal() {
     utilService.animateCSS(modalRef.current, 'fadeOut')
+    utilService.toggleClass(backdropRef.current, 'fade-out')
 
     setTimeout(() => {
-      utilService.animateCSS(backdropRef.current, 'fadeOut')
-    }, 300)
-
-    setTimeout(() => {
+      utilService.toggleClass(backdropRef.current, 'fade-out')
       onCloseModal()
-    }, 600)
+    }, 1000)
   }
 
   function onSetMemberFilterBy({ target }) {

@@ -17,3 +17,13 @@
     opacity: 0.8;
   }
 }
+
+@keyframes backdropFadeOut {
+  from {
+    opacity: 0.8;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
