@@ -7,7 +7,7 @@ import { utilService } from '../../services/util.service'
 import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useForm } from '../../customHooks/useForm'
 import { addExpenseToGroup } from '../../store/actions/group.actions'
-import { hideDynamicModal, showDynamicModal } from '../../store/actions/system.actions'
+import { showDynamicModal } from '../../store/actions/system.actions'
 
 import { FriendSelector } from '../friend/FriendSelector'
 import { InvolvedFriendList } from '../friend/InvolvedFriendList'
@@ -19,7 +19,9 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
   const backdropRef = useRef()
   const modalRef = useRef()
 
-  useClickOutside(modalRef, closeModal)
+  useClickOutside(modalRef, () => {
+    if (!modal.isOpen) closeModal()
+  })
 
   function closeModal() {
     utilService.animateCSS(modalRef.current, 'fadeOut')

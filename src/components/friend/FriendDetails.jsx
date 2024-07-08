@@ -1,9 +1,9 @@
-import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 
 import { groupService } from '../../services/group.service.local'
 import { GeneralHeader } from '../general/GeneralHeader'
-import { MainLoader } from '../general/MainLoader'
+import { SecondaryLoader } from '../loaders/SecondaryLoader'
 
 export function FriendDetails() {
   const [friend, setFriend] = useState(null)
@@ -12,6 +12,11 @@ export function FriendDetails() {
 
   useEffect(() => {
     loadFriendDetails()
+
+    return () => {
+      setFriend(null)
+      setGroup(null)
+    }
   }, [friendId])
 
   async function loadFriendDetails() {
@@ -25,7 +30,7 @@ export function FriendDetails() {
     }
   }
 
-  if (!friend || !group) return <MainLoader />
+  if (!friend || !group) return <SecondaryLoader />
 
   const { fullName, imgUrl } = friend
   return (

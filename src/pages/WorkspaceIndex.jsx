@@ -4,7 +4,7 @@ import { Outlet, useLocation } from 'react-router'
 
 import { loadGroups } from '../store/actions/group.actions'
 import { Sidebar } from '../components/sidebar/Sidebar'
-import { MainLoader } from '../components/general/MainLoader'
+import { MainLoader } from '../components/loaders/MainLoader'
 import { DynamicInformation } from '../components/general/DynamicInformation'
 
 export function WorkspaceIndex() {

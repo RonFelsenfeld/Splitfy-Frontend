@@ -21,7 +21,6 @@
 @import 'components/general/empty-expenses';
 @import 'components/general/date-picker-field';
 @import 'components/general/notes-field';
-@import 'components/general/main-loader';
 @import 'components/general/anyday-invitation';
 
 // * Dashboard
@@ -61,3 +60,7 @@
 // * Modal
 @import 'components/modals/edit-expense-modal';
 @import 'components/modals/dynamic-modal';
+
+// * Loaders
+@import 'components/loaders/main-loader';
+@import 'components/loaders/secondary-loader';

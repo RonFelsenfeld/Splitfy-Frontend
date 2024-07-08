@@ -12,10 +12,6 @@
   }
 
   .loading-msg {
-    font-size: em(24px);
-    font-family: $main-font-family;
-    font-weight: normal;
-    color: $secondary-font-clr;
-    opacity: 0.6;
+    @include loadingMsg;
   }
 }

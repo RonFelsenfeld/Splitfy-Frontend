@@ -113,7 +113,7 @@ function getAllExpensesFromGroups(groups) {
 function getDefaultGroup() {
   return {
     title: '',
-    imgUrl: null,
+    imgUrl: '/assets/img/general/group-default.png', // todo cloudinary
     members: [],
     expenses: [],
     activities: [],

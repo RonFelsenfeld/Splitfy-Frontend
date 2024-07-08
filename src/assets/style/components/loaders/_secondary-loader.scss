@@ -1,0 +1,10 @@
+.secondary-loader {
+  @include mainColumnContainer;
+
+  gap: 3px;
+  padding-block-start: 150px;
+
+  .loading-msg {
+    @include loadingMsg(em(20px));
+  }
+}

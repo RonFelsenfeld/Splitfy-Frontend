@@ -7,6 +7,7 @@ import { removeExpenseFromGroup } from '../../store/actions/group.actions'
 import { GeneralHeader } from '../general/GeneralHeader'
 import { ExpenseList } from './ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
+import { SecondaryLoader } from '../loaders/SecondaryLoader'
 
 export function AllExpensesView() {
   const groups = useSelector(store => store.groupModule.groups)
@@ -44,7 +45,7 @@ export function AllExpensesView() {
     }
   }
 
-  if (!expenses) return <div>Loading...</div>
+  if (!expenses) return <SecondaryLoader />
   return (
     <section className="all-expenses-view">
       <GeneralHeader title="All expenses" />

@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { groupService } from '../../services/group.service.local'
 import { loadGroup, removeExpenseFromGroup } from '../../store/actions/group.actions'
+import { SET_GROUP } from '../../store/reducers/group.reducer'
 
 import { EmptyExpenses } from '../general/EmptyExpenses'
 import { GeneralHeader } from '../general/GeneralHeader'
 import { ExpenseList } from '../expense/ExpenseList'
 import { EditExpenseModal } from '../modals/EditExpenseModal'
-import { SET_GROUP } from '../../store/reducers/group.reducer'
+import { SecondaryLoader } from '../loaders/SecondaryLoader'
 
 export function GroupDetails() {
   const group = useSelector(store => store.groupModule.currentGroup)
@@ -41,8 +42,7 @@ export function GroupDetails() {
     }
   }
 
-  // todo add loader
-  if (!group) return
+  if (!group) return <SecondaryLoader />
 
   const { expenses, title, imgUrl } = group
   return (
