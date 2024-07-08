@@ -63,6 +63,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
     const cmpOptions = {
       type: 'notesField',
       title: 'Add notes',
+      currentNotes: expenseToEdit.notes,
       onSubmit: notes => setExpenseToEdit(prevExpense => ({ ...prevExpense, notes })),
     }
     showDynamicModal(cmpOptions)

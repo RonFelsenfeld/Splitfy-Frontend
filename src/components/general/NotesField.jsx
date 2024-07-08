@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { hideDynamicModal } from '../../store/actions/system.actions'
 
-export function NotesField({ onSubmit }) {
-  const [notes, setNotes] = useState('')
+export function NotesField({ currentNotes, onSubmit }) {
+  const [notes, setNotes] = useState(currentNotes)
 
   function onSaveNotes() {
     onSubmit(notes)
