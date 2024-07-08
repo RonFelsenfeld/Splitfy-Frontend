@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { groupService } from '../../services/group.service.local'
 import { utilService } from '../../services/util.service'
 
-import { useClickOutside } from '../../customHooks/useClickOutside'
 import { useForm } from '../../customHooks/useForm'
 import { addExpenseToGroup } from '../../store/actions/group.actions'
 import { showDynamicModal } from '../../store/actions/system.actions'
@@ -18,10 +17,6 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
   const [memberFilterBy, setMemberFilterBy] = useState('')
   const backdropRef = useRef()
   const modalRef = useRef()
-
-  useClickOutside(modalRef, () => {
-    if (!modal.isOpen) closeModal()
-  })
 
   function closeModal() {
     utilService.animateCSS(modalRef.current, 'fadeOut')
@@ -94,7 +89,7 @@ export function EditExpenseModal({ onCloseModal, group, currentExpense }) {
 
   return (
     <>
-      <div ref={backdropRef} className="modal-backdrop"></div>
+      <div ref={backdropRef} className="modal-backdrop" onClick={closeModal}></div>
 
       <section
         className={`edit-expense-modal animate__animated animate__fadeIn ${

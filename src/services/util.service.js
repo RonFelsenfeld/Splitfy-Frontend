@@ -110,5 +110,5 @@ function animateCSS(el, animation = 'bounce') {
 }
 
 function toggleClass(el, className) {
-  el.classList.toggle(className)
+  if (el) el.classList.toggle(className)
 }
