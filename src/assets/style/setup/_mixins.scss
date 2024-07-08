@@ -54,6 +54,14 @@
     color: $color;
     background-color: $group-header-bg-clr;
 
+    article {
+      background-color: $group-header-bg-clr;
+
+      h4 {
+        color: $color;
+      }
+    }
+
     svg {
       fill: $hovered-font-clr;
     }
